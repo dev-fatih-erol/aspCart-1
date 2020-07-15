@@ -11,6 +11,5 @@
     <Folder Include="Domain\Sale\" />
     <Folder Include="Domain\Statistics\" />
     <Folder Include="Domain\User\" />
-    <Folder Include="Domain\Interface\" />
   </ItemGroup>
 </Project>
