@@ -13,12 +13,10 @@ namespace aspCart.Web.Middleware
     public class ImageResizeMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IFileProvider _fileProvider;
 
-        public ImageResizeMiddleware(RequestDelegate next, IFileProvider fileProvider)
+        public ImageResizeMiddleware(RequestDelegate next)
         {
             _next = next;
-            _fileProvider = fileProvider;
         }
 
         public Task Invoke(HttpContext context)

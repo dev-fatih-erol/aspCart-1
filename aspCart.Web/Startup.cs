@@ -14,16 +14,20 @@ using aspCart.Infrastructure.Services.Statistics;
 using aspCart.Infrastructure.Services.User;
 using aspCart.Web.Areas.Admin.Helpers;
 using aspCart.Web.Helpers;
+using aspCart.Web.Middleware;
 using aspCart.Web.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.Extensions.Options;
 
 namespace aspCart.Web
 {
@@ -93,15 +97,13 @@ namespace aspCart.Web
             services.AddTransient<ISpecificationService, SpecificationService>();
 
             services.AddTransient<IOrderCountService, OrderCountService>();
-            services.AddTransient<IVisitorCountService, VisitorCountService>();
+            //services.AddTransient<IVisitorCountService, VisitorCountService>();
 
             services.AddTransient<IContactUsService, ContactUsService>();
 
 
             services.AddTransient<ViewHelper>();
             services.AddTransient<DataHelper>();
-
-            // services.AddSingleton<IFileProvider>(HostingEnvironment.ContentRootFileProvider);
 
             services.AddControllersWithViews();
         }
@@ -112,10 +114,15 @@ namespace aspCart.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+
+                // redirect http request to https with 301 status code
+                var options = new RewriteOptions().AddRedirectToHttpsPermanent();
+                app.UseRewriter(options);
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -126,8 +133,44 @@ namespace aspCart.Web
 
             app.UseAuthorization();
 
+
+            app.UseImageResize();
+            app.UseStatusCodePages();
+            app.UseSession();
+            //app.UseVisitorCounter();
+
             app.UseEndpoints(endpoints =>
             {
+                 endpoints.MapControllerRoute(
+                 name: "areaRoute",
+                 pattern: "{area:exists}/{controller}/{action}/{id?}",
+                 defaults: new { controller = "Dashboard", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: "productInfo",
+                    pattern: "Product/{seo}",
+                    defaults: new { controller = "Home", action = "ProductInfo" });
+
+                endpoints.MapControllerRoute(
+                    name: "category",
+                    pattern: "Category/{category}",
+                    defaults: new { controller = "Home", action = "ProductCategory" });
+
+                endpoints.MapControllerRoute(
+                    name: "manufacturer",
+                    pattern: "Manufacturer/{manufacturer}",
+                    defaults: new { controller = "Home", action = "ProductManufacturer" });
+
+                endpoints.MapControllerRoute(
+                    name: "productSearch",
+                    pattern: "search/{name?}",
+                    defaults: new { controller = "Home", action = "ProductSearch" });
+
+                endpoints.MapControllerRoute(
+                    name: "create review",
+                    pattern: "CreateReview/{id}",
+                    defaults: new { controller = "Home", action = "CreateReview" });
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
