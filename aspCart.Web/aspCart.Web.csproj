@@ -32,5 +32,12 @@
     <Folder Include="ViewComponents\" />
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Views\Shared\Components\Category\" />
+    <Folder Include="Views\Shared\Components\Filter\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\Cart\" />
+    <Folder Include="Views\ContactUs\" />
+    <Folder Include="Views\Manage\" />
   </ItemGroup>
 </Project>
