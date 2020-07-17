@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspCart.Core", "aspCart.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspCart.Infrastructure", "aspCart.Infrastructure\aspCart.Infrastructure.csproj", "{8B518A8B-FD61-4ED3-9EE9-548E4F0E3975}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspCart.Web", "aspCart.Web\aspCart.Web.csproj", "{B2A64E61-8B86-4F5C-8C12-0071B587A29E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{8B518A8B-FD61-4ED3-9EE9-548E4F0E3975}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B518A8B-FD61-4ED3-9EE9-548E4F0E3975}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B518A8B-FD61-4ED3-9EE9-548E4F0E3975}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A64E61-8B86-4F5C-8C12-0071B587A29E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A64E61-8B86-4F5C-8C12-0071B587A29E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A64E61-8B86-4F5C-8C12-0071B587A29E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A64E61-8B86-4F5C-8C12-0071B587A29E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
