@@ -28,5 +28,9 @@
     <Folder Include="Areas\Admin\Models\Sale\" />
     <Folder Include="Areas\Admin\Models\Support\" />
     <Folder Include="Areas\Admin\Helpers\" />
+    <Folder Include="Middleware\" />
+    <Folder Include="ViewComponents\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Views\" />
   </ItemGroup>
 </Project>
