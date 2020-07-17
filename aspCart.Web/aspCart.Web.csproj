@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aspCart.Core\aspCart.Core.csproj">
@@ -26,5 +27,6 @@
     <Folder Include="Areas\Admin\Models\Catalog\" />
     <Folder Include="Areas\Admin\Models\Sale\" />
     <Folder Include="Areas\Admin\Models\Support\" />
+    <Folder Include="Areas\Admin\Helpers\" />
   </ItemGroup>
 </Project>
