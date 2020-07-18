@@ -52,5 +52,9 @@
     <Folder Include="wwwroot\assets\js\" />
     <Folder Include="wwwroot\assets\js\vendor\" />
     <Folder Include="wwwroot\assets\fonts\" />
+    <Folder Include="wwwroot\assets\images\" />
+    <Folder Include="wwwroot\assets\images\icons\" />
+    <Folder Include="wwwroot\assets\images\logo\" />
+    <Folder Include="wwwroot\assets\images\banner-image\" />
   </ItemGroup>
 </Project>
