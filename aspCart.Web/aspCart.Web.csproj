@@ -46,5 +46,11 @@
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\images\test_images\" />
     <Folder Include="wwwroot\images\system\" />
+    <Folder Include="wwwroot\assets\" />
+    <Folder Include="wwwroot\assets\css\" />
+    <Folder Include="wwwroot\assets\css\vendor\" />
+    <Folder Include="wwwroot\assets\js\" />
+    <Folder Include="wwwroot\assets\js\vendor\" />
+    <Folder Include="wwwroot\assets\fonts\" />
   </ItemGroup>
 </Project>
