@@ -43,5 +43,8 @@
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\ContactUs\" />
     <Folder Include="Views\Manage\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\images\test_images\" />
+    <Folder Include="wwwroot\images\system\" />
   </ItemGroup>
 </Project>
