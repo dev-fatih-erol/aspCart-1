@@ -56,5 +56,8 @@
     <Folder Include="wwwroot\assets\images\icons\" />
     <Folder Include="wwwroot\assets\images\logo\" />
     <Folder Include="wwwroot\assets\images\banner-image\" />
+    <Folder Include="wwwroot\assets\images\product-image\" />
+    <Folder Include="wwwroot\assets\images\product-image\organic\" />
+    <Folder Include="wwwroot\assets\images\feature-bg\" />
   </ItemGroup>
 </Project>
