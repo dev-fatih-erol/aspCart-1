@@ -113,16 +113,21 @@
                         <div class="social-info">
                             <ul>
                                 <li>
-                                    <a href="#"><i class="ion-social-facebook"></i></a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=@string.Format("{0}://{1}{2}{3}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path, Context.Request.QueryString)&t=@(Model.MetaTitle ?? Model.Name)" target="_blank">
+                                        <i class="ion-social-facebook"></i>
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="ion-social-twitter"></i></a>
+                                    <a href="https://twitter.com/intent/tweet?url=@string.Format("{0}://{1}{2}{3}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path, Context.Request.QueryString)&text=@(Model.MetaTitle ?? Model.Name)" target="_blank" >
+                                        <i class="ion-social-twitter"></i>
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="ion-social-google"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ion-social-instagram"></i></a>
+                                    <a href="whatsapp://send?text=@string.Format("{0}://{1}{2}{3}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path, Context.Request.QueryString)&text=@(Model.MetaTitle ?? Model.Name)"
+                                       data-action="share/whatsapp/share" onClick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+                                       target="_blank">
+                                        <i class="ion-social-whatsapp"></i>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -164,75 +169,21 @@
             <div id="des-details2" class="tab-pane @(description == false ? "active" : "")">
                 @await Html.PartialAsync("_ProductSpecification", Model)
             </div>
-                <div id="des-details3" class="tab-pane">
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="review-wrapper">
-                                <div class="single-review">
-                                    <div class="review-img">
-                                        <img src="assets/images/testimonial-image/1.png" alt="" />
-                                    </div>
-                                    <div class="review-content">
-                                        <div class="review-top-wrap">
-                                            <div class="review-left">
-                                                <div class="review-name">
-                                                    <h4>White Lewis</h4>
-                                                </div>
-                                                <div class="rating-product">
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                </div>
-                                            </div>
-                                            <div class="review-left">
-                                                <a href="#">Reply</a>
-                                            </div>
-                                        </div>
-                                        <div class="review-bottom">
-                                            <p>
-                                                Vestibulum ante ipsum primis aucibus orci luctustrices posuere cubilia Curae Suspendisse viverra ed viverra. Mauris ullarper euismod vehicula. Phasellus quam nisi, congue id nulla.
-                                            </p>
-                                        </div>
-                                    </div>
+            <div id="des-details3" class="tab-pane">
+                @await Html.PartialAsync("_ProductReview", Model)
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="review-wrapper">
+                            <div class="single-review">
+                                <div class="review-img">
+                                    <img src="assets/images/testimonial-image/1.png" alt="" />
                                 </div>
-                                <div class="single-review child-review">
-                                    <div class="review-img">
-                                        <img src="assets/images/testimonial-image/2.png" alt="" />
-                                    </div>
-                                    <div class="review-content">
-                                        <div class="review-top-wrap">
-                                            <div class="review-left">
-                                                <div class="review-name">
-                                                    <h4>White Lewis</h4>
-                                                </div>
-                                                <div class="rating-product">
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                </div>
+                                <div class="review-content">
+                                    <div class="review-top-wrap">
+                                        <div class="review-left">
+                                            <div class="review-name">
+                                                <h4>White Lewis</h4>
                                             </div>
-                                            <div class="review-left">
-                                                <a href="#">Reply</a>
-                                            </div>
-                                        </div>
-                                        <div class="review-bottom">
-                                            <p>Vestibulum ante ipsum primis aucibus orci luctustrices posuere cubilia Curae Sus pen disse viverra ed viverra. Mauris ullarper euismod vehicula.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="ratting-form-wrapper pl-50">
-                                <h3>Add a Review</h3>
-                                <div class="ratting-form">
-                                    <form action="#">
-                                        <div class="star-box">
-                                            <span>Your rating:</span>
                                             <div class="rating-product">
                                                 <i class="ion-android-star"></i>
                                                 <i class="ion-android-star"></i>
@@ -241,30 +192,85 @@
                                                 <i class="ion-android-star"></i>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="rating-form-style mb-10">
-                                                    <input placeholder="Name" type="text" />
-                                                </div>
+                                        <div class="review-left">
+                                            <a href="#">Reply</a>
+                                        </div>
+                                    </div>
+                                    <div class="review-bottom">
+                                        <p>
+                                            Vestibulum ante ipsum primis aucibus orci luctustrices posuere cubilia Curae Suspendisse viverra ed viverra. Mauris ullarper euismod vehicula. Phasellus quam nisi, congue id nulla.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-review child-review">
+                                <div class="review-img">
+                                    <img src="assets/images/testimonial-image/2.png" alt="" />
+                                </div>
+                                <div class="review-content">
+                                    <div class="review-top-wrap">
+                                        <div class="review-left">
+                                            <div class="review-name">
+                                                <h4>White Lewis</h4>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="rating-form-style mb-10">
-                                                    <input placeholder="Email" type="email" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="rating-form-style form-submit">
-                                                    <textarea name="Your Review" placeholder="Message"></textarea>
-                                                    <input type="submit" value="Submit" />
-                                                </div>
+                                            <div class="rating-product">
+                                                <i class="ion-android-star"></i>
+                                                <i class="ion-android-star"></i>
+                                                <i class="ion-android-star"></i>
+                                                <i class="ion-android-star"></i>
+                                                <i class="ion-android-star"></i>
                                             </div>
                                         </div>
-                                    </form>
+                                        <div class="review-left">
+                                            <a href="#">Reply</a>
+                                        </div>
+                                    </div>
+                                    <div class="review-bottom">
+                                        <p>Vestibulum ante ipsum primis aucibus orci luctustrices posuere cubilia Curae Sus pen disse viverra ed viverra. Mauris ullarper euismod vehicula.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-5">
+                        <div class="ratting-form-wrapper pl-50">
+                            <h3>Add a Review</h3>
+                            <div class="ratting-form">
+                                <form action="#">
+                                    <div class="star-box">
+                                        <span>Your rating:</span>
+                                        <div class="rating-product">
+                                            <i class="ion-android-star"></i>
+                                            <i class="ion-android-star"></i>
+                                            <i class="ion-android-star"></i>
+                                            <i class="ion-android-star"></i>
+                                            <i class="ion-android-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="rating-form-style mb-10">
+                                                <input placeholder="Name" type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="rating-form-style mb-10">
+                                                <input placeholder="Email" type="email" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="rating-form-style form-submit">
+                                                <textarea name="Your Review" placeholder="Message"></textarea>
+                                                <input type="submit" value="Submit" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -990,71 +996,3 @@
     </div> <!-- row end -->
 </div> <!-- container end -->
 <!-- lightbox modal -->
-
-<script>// lightbox
-    $(function () {
-        var currentSlide = 0;
-        var imgSlides = document.getElementsByClassName('lightbox-slide');
-
-        $('#lightbox-modal').on('show.bs.modal', function (event) {
-            let imgIndex = $(event.relatedTarget).data('img-index');
-
-            imgSlides[imgIndex].style.display = 'block';
-            currentSlide = imgIndex;
-            updateText(currentSlide);
-        });
-
-        $('#lightbox-modal').on('hide.bs.modal', function (event) {
-            imgSlides[currentSlide].style.display = 'none'; // hide the current image
-        });
-
-        $('.next').on('click', function () {
-            imgSlides[currentSlide].style.display = 'none';
-
-            if (currentSlide == imgSlides.length - 1) {
-                currentSlide = 0; // set the currentSlide to the start of slides
-            } else {
-                currentSlide++;
-            }
-
-            imgSlides[currentSlide].style.display = 'block';
-            updateText(currentSlide);
-        });
-
-        $('.prev').on('click', function () {
-            imgSlides[currentSlide].style.display = 'none';
-
-            if (currentSlide == 0) {
-                currentSlide = imgSlides.length - 1; // set the currentSlide to the end of slides
-            } else {
-                currentSlide--;
-            }
-
-            imgSlides[currentSlide].style.display = 'block';
-            updateText(currentSlide);
-        });
-
-        function updateText(n) {
-            $('#lightbox-modal').find('.modal-title').text(n + 1 + ' / ' + imgSlides.length)
-        }
-    });
-
-    $(function () {
-        $('#product-info-tabs li a').on('click', function (e) {
-            window.location.hash = '#!#' + e.target.id.toLowerCase();
-        });
-
-        $(function () {
-            if (window.location.hash.length > 0) {
-                let id = window.location.hash.replace('#!', '');
-                $(id).tab('show');
-            }
-        })
-    });
-
-    $(function () {
-        $('#reviewCount').on('click', function () {
-            window.location.hash = '#!#reviews';
-            $('#reviews').tab('show');
-        });
-    });</script>
