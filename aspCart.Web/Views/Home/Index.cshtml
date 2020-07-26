@@ -413,7 +413,15 @@
                                         </div>
                                         <div class="pricing-meta">
                                             <ul>
-                                                <li class="current-price">@product.Price.ToString("N2") TL</li>
+                                                @if (product.OldPrice > 0)
+                                                {
+                                                    <li class="old-price">@product.OldPrice.ToString("N2") TL</li>
+                                                    <li class="current-price">@Html.Raw(product.Price.ToString("N2")) TL</li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="current-price">@product.Price.ToString("N2") TL</li>
+                                                }
                                             </ul>
                                         </div>
                                     </div>
@@ -450,7 +458,15 @@
                                         </div>
                                         <div class="pricing-meta">
                                             <ul>
-                                                <li class="current-price">@product.Price.ToString("N2") TL</li>
+                                                @if (product.OldPrice > 0)
+                                                {
+                                                    <li class="old-price">@product.OldPrice.ToString("N2") TL</li>
+                                                    <li class="current-price">@Html.Raw(product.Price.ToString("N2")) TL</li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="current-price">@product.Price.ToString("N2") TL</li>
+                                                }
                                             </ul>
                                         </div>
                                     </div>

@@ -30,50 +30,71 @@
                 <div class="product-details-img product-details-tab">
                     <div class="zoompro-wrap zoompro-2">
                         <div class="zoompro-border zoompro-span">
-                            <img class="zoompro" src="assets/images/product-image/organic/product-11.jpg" data-zoom-image="assets/images/product-image/organic/zoom/1.jpg" alt="" />
+                            @{
+                                var mainImageSrc = "/images/system/no-image.png";
+                                if (Model.MainImage != null)
+                                {
+                                    mainImageSrc = Model.MainImage;
+                                }
+                            }
+                            <img src="@mainImageSrc"
+                                 class="zoompro"
+                                 alt="@Model.Name"
+                                 data-zoom-image="@mainImageSrc" />
                         </div>
                     </div>
                     <div id="gallery" class="product-dec-slider-2">
-                        <a class="active" data-image="assets/images/product-image/organic/product-11.jpg" data-zoom-image="assets/images/product-image/organic/zoom/1.jpg">
-                            <img src="assets/images/product-image/organic/product-11.jpg" alt="" />
-                        </a>
-                        <a data-image="assets/images/product-image/organic/product-9.jpg" data-zoom-image="assets/images/product-image/organic/zoom/2.jpg">
-                            <img src="assets/images/product-image/organic/product-9.jpg" alt="" />
-                        </a>
-                        <a data-image="assets/images/product-image/organic/product-20.jpg" data-zoom-image="assets/images/product-image/organic/zoom/3.jpg">
-                            <img src="assets/images/product-image/organic/product-20.jpg" alt="" />
-                        </a>
-                        <a data-image="assets/images/product-image/organic/product-19.jpg" data-zoom-image="assets/images/product-image/organic/zoom/4.jpg">
-                            <img src="assets/images/product-image/organic/product-19.jpg" alt="" />
-                        </a>
+                        @foreach (var img in Model.ProductImages)
+                        {
+                            <a class="@imgIndex == 0 ? 'active' : ''" data-image="@img" data-zoom-image="@img">
+                                <img src="@img" alt="@Model.Name" />
+                            </a>
+                            imgIndex++;
+                        }
                     </div>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-12">
                 <div class="product-details-content">
-                    <h2>Originals Kaval Windbr</h2>
-                    <p class="reference">Reference:<span> demo_17</span></p>
+                    <h2>@Model.Name</h2>
+                    @{
+                        var mLink = new List<string>();
+                        foreach (var manufacturer in Model.Manufacturers)
+                        {
+                            mLink.Add($"<a href=\"/Manufacturer/{manufacturer.Name}\">{ @manufacturer.Name}</a>");
+                        }
+                    }
+                    <p class="reference">Reference: @Html.Raw(string.Join(", ", mLink))</p>
                     <div class="pro-details-rating-wrap">
                         <div class="rating-product">
-                            <i class="ion-android-star"></i>
-                            <i class="ion-android-star"></i>
-                            <i class="ion-android-star"></i>
-                            <i class="ion-android-star"></i>
-                            <i class="ion-android-star"></i>
+                            @{
+                                int activeStar = 0;
+                                int roundedRating = Convert.ToInt32(Math.Round(Model.Rating, 0, MidpointRounding.AwayFromZero));
+                            }
+                            @for (int i = 0; i < roundedRating; i++)
+                            {
+                                <i class="ion-android-star"></i>
+                                activeStar++;
+                            }
+                            @for (int i = 0; i < 5 - activeStar; i++)
+                            {
+                                <i class="ion-android-star-outline"></i>
+                            }
+                            @Model.Rating.ToString("N2")
                         </div>
-                        <span class="read-review"><a class="reviews" href="#">Read reviews (1)</a></span>
+                        <span class="read-review"><a class="reviews" asp-controller="CreateReview" asp-action="@Model.Id">Read reviews (@Model.ReviewCount)</a></span>
                     </div>
                     <div class="pricing-meta">
                         <ul>
-                            <li class="old-price not-cut">€18.90</li>
-                        </ul>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisic elit eiusm tempor incidid ut labore et dolore magna aliqua. Ut enim ad minim venialo quis nostrud exercitation ullamco</p>
-                    <div class="pro-details-list">
-                        <ul>
-                            <li>- 0.5 mm Dail</li>
-                            <li>- Inspired vector icons</li>
-                            <li>- Very modern style</li>
+                            @if (Model.OldPrice > 0)
+                            {
+                                <li class="old-price">@Model.OldPrice.ToString("N2") TL</li>
+                                <li class="current-price">@Html.Raw(Model.Price.ToString("N2")) TL</li>
+                            }
+                            else
+                            {
+                                <li class="old-price not-cut">@Model.Price.ToString("N2") TL</li>
+                            }
                         </ul>
                     </div>
                     <div class="pro-details-quality mt-0px">
@@ -81,15 +102,10 @@
                             <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
                         </div>
                         <div class="pro-details-cart btn-hover">
-                            <a href="#"> + Add To Cart</a>
-                        </div>
-                    </div>
-                    <div class="pro-details-wish-com">
-                        <div class="pro-details-wishlist">
-                            <a href="#"><i class="ion-android-favorite-outline"></i>Add to wishlist</a>
-                        </div>
-                        <div class="pro-details-compare">
-                            <a href="#"><i class="ion-ios-shuffle-strong"></i>Add to compare</a>
+                            <form asp-area="" asp-controller="Cart" asp-action="Add" method="post">
+                                <input type="hidden" value="@Model.Id" name="id" />
+                                <a href="#" onclick="this.closest('form').submit();return false;"> + Add To Cart</a>
+                            </form>
                         </div>
                     </div>
                     <div class="pro-details-social-info">
@@ -129,30 +145,25 @@
     <div class="container">
         <div class="description-review-wrapper">
             <div class="description-review-topbar nav">
-                <a data-toggle="tab" href="#des-details1">Description</a>
-                <a class="active" data-toggle="tab" href="#des-details2">Product Details</a>
-                <a data-toggle="tab" href="#des-details3">Reviews (2)</a>
+                @if ((Model.Description != null && Model.Description.Length > 0) || Model.Specifications.Count == 0)
+                {
+                    <a data-toggle="tab" href="#des-details1" class="active">Description</a>
+                    description = true;
+                }
+
+                <a class="@(description == false ? "active" : "")" data-toggle="tab" href="#des-details2">Product Details</a>
+                <a data-toggle="tab" href="#des-details3">Reviews (@Model.ReviewCount)</a>
             </div>
             <div class="tab-content description-review-bottom">
-                <div id="des-details2" class="tab-pane active">
-                    <div class="product-anotherinfo-wrapper">
-                        <ul>
-                            <li><span>Weight</span> 400 g</li>
-                            <li><span>Dimensions</span>10 x 10 x 15 cm</li>
-                            <li><span>Materials</span> 60% cotton, 40% polyester</li>
-                            <li><span>Other Info</span> American heirloom jean shorts pug seitan letterpress</li>
-                        </ul>
+                @if ((Model.Description != null && Model.Description.Length > 0) || Model.Specifications.Count == 0)
+                {
+                    <div id="des-details1" class="tab-pane active">
+                        @await Html.PartialAsync("_ProductDescription", Model)
                     </div>
-                </div>
-                <div id="des-details1" class="tab-pane">
-                    <div class="product-description-wrapper">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <p>
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commo consequat. Duis aute irure dolor in reprehend in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                        </p>
-                    </div>
-                </div>
+                }
+            <div id="des-details2" class="tab-pane @(description == false ? "active" : "")">
+                @await Html.PartialAsync("_ProductSpecification", Model)
+            </div>
                 <div id="des-details3" class="tab-pane">
                     <div class="row">
                         <div class="col-lg-7">
@@ -928,92 +939,13 @@
     </div>
 </section>
 <!-- Recent product area end -->
+
+
+
+
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <center>
-                @{
-                    var mainImageSrc = "/images/system/no-image.png";
-                    if (Model.MainImage != null)
-                    {
-                        mainImageSrc = Model.MainImage;
-                    }
-                }
-                <img src="@mainImageSrc"
-                     class="product-main-image img-fluid"
-                     alt="@Model.Name"
-                     data-toggle="modal"
-                     data-target="#lightbox-modal"
-                     data-img-index="0" />
-            </center>
-            @if (Model.ProductImages.Count > 0)
-            {
-                <div class="row">
-                    <div class="col-md-12 product-image-container">
-                        @foreach (var img in Model.ProductImages)
-                        {
-                            <div class="product-image-thumbnail-container">
-                                <img src="@img"
-                                     class="product-image-thumbnail"
-                                     data-toggle="modal"
-                                     data-target="#lightbox-modal"
-                                     data-img-index="@imgIndex" />
-                            </div>
 
-                            imgIndex++;
-                        }
-                    </div>
-                </div>
-            }
-        </div>
-        <div class="col-md-8">
-            <h4>@Model.Name</h4>
-            @if (Model.Rating > 0)
-            {
-                <span title="rating">
-                    @{
-                        int activeStar = 0;
-                        int roundedRating = Convert.ToInt32(Math.Round(Model.Rating, 0, MidpointRounding.AwayFromZero));
-                    }
-                    @for (int i = 0; i < roundedRating; i++)
-                    {
-                        <i class="fa fa-star star-active"></i>
-                        activeStar++;
-                    }
-                    @for (int i = 0; i < 5 - activeStar; i++)
-                    {
-                        <i class="fa fa-star star-inactive"></i>
-                    }
-                </span>
-                <h6 class="text-muted" style="display: inline-block;">
-                    @Model.Rating.ToString("N2")
-                </h6>
-                <span id="reviewCount" class="text-muted review-count" title="review counts">(@Model.ReviewCount)</span>
-                <small><a asp-controller="CreateReview" asp-action="@Model.Id">write a review</a></small>
-            }
-            @{
-                var mLink = new List<string>();
-                foreach (var manufacturer in Model.Manufacturers)
-                {
-                    mLink.Add($"<a href=\"/Manufacturer/{manufacturer.Name}\">{ @manufacturer.Name}</a>");
-                }
-            }
-            <h6>@Html.Raw(string.Join(", ", mLink))</h6>
-            @if (Model.OldPrice > 0)
-            {
-                <h6>
-                    <strike class="text-muted">@Model.OldPrice.ToString("C2")</strike> @Html.Raw(Model.Price.ToString("C2"))
-                </h6>
-            }
-            else
-            {
-                <h6>@Model.Price.ToString("C2")</h6>
-            }
-            <form asp-area="" asp-controller="Cart" asp-action="Add" method="post">
-                <input type="hidden" value="@Model.Id" name="id" />
-                <button type="submit" id="addToCart" class="btn btn-primary btn-sm">Add to cart</button>
-            </form>
-        </div>
     </div> <!-- row end -->
     <br />
     <div class="row">
@@ -1058,31 +990,6 @@
     </div> <!-- row end -->
 </div> <!-- container end -->
 <!-- lightbox modal -->
-<div class="modal fade" id="lightbox-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="border-bottom: none;">
-                <h5 class="modal-title text-muted"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" style="width: 100%; height: 100%;">
-
-                @foreach (var img in Model.ProductImages)
-                {
-                    <img src="@img" id="modal-img-src" class="lightbox-slide" />
-                }
-
-                @if (Model.ProductImages.Count > 1)
-                {
-                    <a class="prev text-muted">&#10094;</a>
-                    <a class="next text-muted">&#10095;</a>
-                }
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>// lightbox
     $(function () {
