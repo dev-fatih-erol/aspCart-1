@@ -118,7 +118,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://twitter.com/intent/tweet?url=@string.Format("{0}://{1}{2}{3}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path, Context.Request.QueryString)&text=@(Model.MetaTitle ?? Model.Name)" target="_blank" >
+                                    <a href="https://twitter.com/intent/tweet?url=@string.Format("{0}://{1}{2}{3}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path, Context.Request.QueryString)&text=@(Model.MetaTitle ?? Model.Name)" target="_blank">
                                         <i class="ion-social-twitter"></i>
                                     </a>
                                 </li>
@@ -159,118 +159,19 @@
                 <a class="@(description == false ? "active" : "")" data-toggle="tab" href="#des-details2">Product Details</a>
                 <a data-toggle="tab" href="#des-details3">Reviews (@Model.ReviewCount)</a>
             </div>
-            <div class="tab-content description-review-bottom">
+            <div class="tab-content description-review-bottom" style="padding-top:30px">
                 @if ((Model.Description != null && Model.Description.Length > 0) || Model.Specifications.Count == 0)
                 {
                     <div id="des-details1" class="tab-pane active">
                         @await Html.PartialAsync("_ProductDescription", Model)
                     </div>
                 }
-            <div id="des-details2" class="tab-pane @(description == false ? "active" : "")">
-                @await Html.PartialAsync("_ProductSpecification", Model)
-            </div>
-            <div id="des-details3" class="tab-pane">
-                @await Html.PartialAsync("_ProductReview", Model)
-                <div class="row">
-                    <div class="col-lg-7">
-                        <div class="review-wrapper">
-                            <div class="single-review">
-                                <div class="review-img">
-                                    <img src="assets/images/testimonial-image/1.png" alt="" />
-                                </div>
-                                <div class="review-content">
-                                    <div class="review-top-wrap">
-                                        <div class="review-left">
-                                            <div class="review-name">
-                                                <h4>White Lewis</h4>
-                                            </div>
-                                            <div class="rating-product">
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="review-left">
-                                            <a href="#">Reply</a>
-                                        </div>
-                                    </div>
-                                    <div class="review-bottom">
-                                        <p>
-                                            Vestibulum ante ipsum primis aucibus orci luctustrices posuere cubilia Curae Suspendisse viverra ed viverra. Mauris ullarper euismod vehicula. Phasellus quam nisi, congue id nulla.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-review child-review">
-                                <div class="review-img">
-                                    <img src="assets/images/testimonial-image/2.png" alt="" />
-                                </div>
-                                <div class="review-content">
-                                    <div class="review-top-wrap">
-                                        <div class="review-left">
-                                            <div class="review-name">
-                                                <h4>White Lewis</h4>
-                                            </div>
-                                            <div class="rating-product">
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="review-left">
-                                            <a href="#">Reply</a>
-                                        </div>
-                                    </div>
-                                    <div class="review-bottom">
-                                        <p>Vestibulum ante ipsum primis aucibus orci luctustrices posuere cubilia Curae Sus pen disse viverra ed viverra. Mauris ullarper euismod vehicula.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="ratting-form-wrapper pl-50">
-                            <h3>Add a Review</h3>
-                            <div class="ratting-form">
-                                <form action="#">
-                                    <div class="star-box">
-                                        <span>Your rating:</span>
-                                        <div class="rating-product">
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                            <i class="ion-android-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="rating-form-style mb-10">
-                                                <input placeholder="Name" type="text" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="rating-form-style mb-10">
-                                                <input placeholder="Email" type="email" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="rating-form-style form-submit">
-                                                <textarea name="Your Review" placeholder="Message"></textarea>
-                                                <input type="submit" value="Submit" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                <div id="des-details2" class="tab-pane @(description == false ? "active" : "")">
+                    @await Html.PartialAsync("_ProductSpecification", Model)
                 </div>
-            </div>
+                <div id="des-details3" class="tab-pane">
+                    @await Html.PartialAsync("_ProductReview", Model)
+                </div>
             </div>
         </div>
     </div>
@@ -973,7 +874,6 @@
                     <a class="nav-link" id="reviews" data-toggle="tab" href="#reviewsTab" role="tab">Reviews</a>
                 </li>
             </ul>
-
             <!-- Tab panes -->
             <div class="tab-content">
                 @if ((Model.Description != null && Model.Description.Length > 0) || Model.Specifications.Count == 0)
@@ -995,4 +895,113 @@
         </div>
     </div> <!-- row end -->
 </div> <!-- container end -->
-<!-- lightbox modal -->
+@section Scripts {
+    <script>
+          $(function () {
+        var template = `
+            <tr>
+                <th>
+                    <ul>
+                        <li class ="r-user">_user_placeholder</li>
+                        <li class ="r-date">_date_placeholder</li>
+                        <li class ="r-verified">_verified_placeholder</li>
+                    </ul>
+                </th>
+                <td>
+                    <div>
+                        _star_placeholder
+                        <span class ="review-title">_title_placeholder</span>
+                    </div>
+
+                    <div class ="review-message">
+                        <p>_message_placeholder</p>
+                        <span class ="date-edited text-muted">_date_modified_placeholder</span>
+                    </div>
+                    <p class ="helpful text-muted">
+                        Did you find this review helpful?
+                        <button class ="btn btn-sm btn-secondary">Yes</button>
+                        <button class ="btn btn-sm btn-secondary">No</button>
+                    </p>
+                </td>
+            </tr>
+        `
+
+        // get product review
+                $('#review-container').append("<div>Loading...</div>");
+                $.ajax({
+                    type: 'GET',
+                    url: '/home/productreview/@Model.Id',
+                    dataType: 'Json',
+                    success: function (data) {
+                        $('#review-container').empty(); // remove existing dom
+
+                        let one = 0, two = 0, three = 0, four = 0, five = 0;
+
+                        if (data.length > 0) {
+                            $.each(data, function (i, item) {
+
+                                let review = template;
+                                review = review.replace('_user_placeholder', item.username);
+                                review = review.replace('_date_placeholder', item.createdOn);
+                                review = review.replace('_star_placeholder', createStar(item.rating));
+                                review = review.replace('_title_placeholder', item.title);
+                                review = review.replace('_message_placeholder', item.message);
+
+                                if (item.dateModified !== '1/1/0001 12:00:00 AM')
+                                    review = review.replace('_date_modified_placeholder', 'Last edited: ' + item.dateModified);
+                                else
+                                    review = review.replace('_date_modified_placeholder', '');
+
+                                if (item.isVerifiedOwner)
+                                    review = review.replace('_verified_placeholder', '<i class ="fa fa-check verified-check"></i> Verified Purchase');
+                                else
+                                    review = review.replace('_verified_placeholder', '<i class ="fa fa-close verified-x"></i> Verified Purchase');
+
+                                switch (item.rating) {
+                                    case 1: one++; break;
+                                    case 2: two++; break;
+                                    case 3: three++; break;
+                                    case 4: four++; break;
+                                    case 5: five++; break;
+                                }
+
+                                $('#review-container').append(review);
+                            });
+                        } else {
+                            $('#review-container').append('<h5 style="text-align: center; padding: 20px;">There are no reviews yet...</div>');
+                        }
+
+                        // set review count and percentage
+                        $('#one-star').empty();
+                        $('#one-star').append(one / data.length * 100 + '% (' + one + ')');
+
+                        $('#two-star').empty();
+                        $('#two-star').append(two / data.length * 100 + '% (' + two + ')');
+
+                        $('#three-star').empty();
+                        $('#three-star').append(three / data.length * 100 + '% (' + three + ')');
+
+                        $('#four-star').empty();
+                        $('#four-star').append(four / data.length * 100 + '% (' + four + ')');
+
+                        $('#five-star').empty();
+                        $('#five-star').append(five / data.length * 100 + '% (' + five + ')');
+                    }
+                });
+
+
+        function createStar(count) {
+            let starTemplate = '';
+            for (i = 0; i < count; i++) {
+                starTemplate += '<i class="on-android-star"></i>';
+            }
+
+            for (i = 0; i < 5 - count; i++) {
+                starTemplate += '<i class="on-android-star-outline"></i>';
+            }
+
+            return starTemplate;
+        };
+    });
+    </script>
+}

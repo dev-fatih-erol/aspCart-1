@@ -562,5 +562,7 @@
     <!-- Main Activation JS -->
     <script src="/assets/js/main.js"></script>
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
