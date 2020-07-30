@@ -136,9 +136,8 @@ namespace aspCart.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseRequestLocalization();
             app.UseImageResize();
             app.UseStatusCodePages();
