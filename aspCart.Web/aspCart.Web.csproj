@@ -51,15 +51,5 @@
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\images\test_images\" />
     <Folder Include="wwwroot\images\system\" />
-    <Folder Include="wwwroot\assets\css\" />
-    <Folder Include="wwwroot\assets\css\vendor\" />
-    <Folder Include="wwwroot\assets\js\" />
-    <Folder Include="wwwroot\assets\js\vendor\" />
-    <Folder Include="wwwroot\assets\fonts\" />
-    <Folder Include="wwwroot\assets\images\icons\" />
-    <Folder Include="wwwroot\assets\images\logo\" />
-    <Folder Include="wwwroot\assets\images\product-image\" />
-    <Folder Include="wwwroot\assets\images\product-image\organic\" />
-    <Folder Include="wwwroot\assets\images\feature-bg\" />
   </ItemGroup>
 </Project>
