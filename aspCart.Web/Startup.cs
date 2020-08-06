@@ -60,7 +60,7 @@ namespace aspCart.Web
 
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("aspCart.Web")));
 
             // idenity password requirement
             services.Configure<IdentityOptions>(options =>
@@ -180,6 +180,12 @@ namespace aspCart.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            // apply migration
+            SampleDataProvider.ApplyMigration(app.ApplicationServices);
+
+            // seed default data
+            SampleDataProvider.Seed(app.ApplicationServices, Configuration);
         }
     }
 }
