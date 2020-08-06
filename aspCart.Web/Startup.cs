@@ -181,11 +181,11 @@ namespace aspCart.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            // apply migration
-            SampleDataProvider.ApplyMigration(app.ApplicationServices);
+            //// apply migration
+            //SampleDataProvider.ApplyMigration(app.ApplicationServices);
 
-            // seed default data
-            SampleDataProvider.Seed(app.ApplicationServices, Configuration);
+            //// seed default data
+            //SampleDataProvider.Seed(app.ApplicationServices, Configuration);
         }
     }
 }
