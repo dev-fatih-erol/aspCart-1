@@ -54,5 +54,6 @@
     <Folder Include="wwwroot\images\system\" />
     <Folder Include="Views\Shared\Components\PopulerCategory\" />
     <Folder Include="Views\Shared\Components\PopulerCategoryProduct\" />
+    <Folder Include="Views\Shared\Components\RecommendationForYou\" />
   </ItemGroup>
 </Project>

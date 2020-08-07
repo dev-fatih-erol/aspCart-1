@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ProductModel>
+<div class="mb-6">
+    <div class="d-flex justify-content-between align-items-center border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-sm-bottom-0 mb-4">
+        <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Recommendation For You</h3>
+        <a class="d-block text-gray-16 border-top border-color-1 border-md-top-0 w-100 w-md-auto pt-2 pt-md-0" href="../shop/product-categories-7-column-full-width.html">
+            View All Recommendations <i class="ec ec-arrow-right-categproes"></i>
+        </a>
+    </div>
+    <ul class="row list-unstyled products-group no-gutters">
+        @{int i = 1; }
+        @foreach (var product in Model)
+        {
+            string cssClass = string.Empty;
+
+            if (i == 4)
+            {
+                cssClass = "remove-divider-md-lg";
+            }
+            if (i == 5)
+            {
+                cssClass = "remove-divider-xl";
+            }
+            if (i == 6)
+            {
+                cssClass = "remove-divider-wd";
+            }
+            if (i == 8)
+            {
+                cssClass = "remove-divider-md-lg";
+            }
+            if (i == 10)
+            {
+                cssClass = "remove-divider-xl";
+            }
+            if (i == 11)
+            {
+                cssClass = "d-xl-none d-wd-block";
+            }
+            if (i == 12)
+            {
+                cssClass = "d-xl-none d-wd-block remove-divider-wd remove-divider-md-lg";
+            }
+            <li class="col-6 col-md-3 col-xl-2gdot4-only col-wd-2 product-item">
+                <div class="product-item__outer h-100">
+                    <div class="product-item__inner px-xl-4 p-3">
+                        <div class="product-item__body pb-xl-2">
+                            <div class="mb-2">
+                                <a asp-area="" asp-controller="Category" asp-action="@product.Categories[0].Name" class="font-size-12 text-gray-5">@product.Categories[0].Name</a>
+                            </div>
+                            <h5 class="mb-1 product-item__title">
+                                <a href="/Product/@product.SeoUrl" class="text-blue font-weight-bold" title="@product.Name">@product.Name</a>
+                            </h5>
+                            <div class="mb-2">
+                                <a href="/Product/@product.SeoUrl" class="d-block text-center">
+                                    @if (product.MainImage != null)
+                                    {
+                                        <img class="img-fluid" src="@product.MainImage?w=155&h=147&mode=crop" alt="@product.Name" /> }
+                                    else
+                                    { <img class="img-fluid" src="~/images/system/no-image.png" alt="@product.Name" />}
+                                </a>
+                            </div>
+                            <div class="flex-center-between mb-1">
+                                <div class="prodcut-price">
+                                    <div class="text-gray-100">
+                                        @if (product.OldPrice > 0)
+                                        {@product.OldPrice.ToString("N2") <span>TL</span> }
+                                    else
+                                    {@Html.Raw(product.Price.ToString("N2")) <span>TL</span>}
+                                    </div>
+                                </div>
+                                <div class="d-none d-xl-block prodcut-add-cart">
+                                    <form asp-area="" asp-controller="Cart" asp-action="Add" method="post">
+                                        <input type="hidden" value="@product.Id" name="id" />
+                                        <a href="#" onclick="this.closest('form').submit();return false;" class="btn-add-cart btn-primary transition-3d-hover">
+                                            <i class="ec ec-add-to-cart"></i>
+                                        </a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            i++;
+        }
+    </ul>
+</div>
