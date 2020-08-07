@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ProductModel>
+@foreach (var product in Model)
+{
+    <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
+        <div class="col-auto">
+            <a href="/Product/@product.SeoUrl" class="d-block width-75 text-center">
+                @if (product.MainImage != null)
+                {
+                    <img class="img-fluid" src="@product.MainImage?w=75&h=75&mode=crop" alt="@product.Name" /> }
+                else
+                { <img class="img-fluid" src="~/images/system/no-image.png" alt="@product.Name" />}
+            </a>
+        </div>
+        <div class="col pl-4 d-flex flex-column">
+            <h5 class="product-item__title mb-0">
+                <a href="/Product/@product.SeoUrl" class="text-blue font-weight-bold" title="@product.Name">@product.Name</a>
+            </h5>
+            <div class="prodcut-price mt-auto flex-horizontal-center">
+                @if (product.OldPrice > 0)
+                {
+                    <ins class="font-size-15 text-decoration-none">@Html.Raw(product.Price.ToString("N2")) TL</ins>
+                    <del class="font-size-12 text-gray-9 ml-2">@product.OldPrice.ToString("N2") TL</del>
+                }
+                else
+                {
+
+                    <ins class="font-size-15 text-decoration-none">@product.Price.ToString("N2") TL</ins>
+                }
+            </div>
+        </div>
+    </li>
+}
