@@ -16,6 +16,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Imageflow.Server" Version="0.3.6" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aspCart.Core\aspCart.Core.csproj">

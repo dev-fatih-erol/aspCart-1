@@ -14,9 +14,9 @@ using aspCart.Infrastructure.Services.Statistics;
 using aspCart.Infrastructure.Services.User;
 using aspCart.Web.Areas.Admin.Helpers;
 using aspCart.Web.Helpers;
-using aspCart.Web.Middleware;
 using aspCart.Web.Models;
 using AutoMapper;
+using Imageflow.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -25,10 +25,7 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Hosting.Internal;
-using Microsoft.Extensions.Options;
 
 namespace aspCart.Web
 {
@@ -83,7 +80,7 @@ namespace aspCart.Web
             services.Configure<UserAccount>(
                 Configuration.GetSection("UserAccount"));
 
-            services.AddDistributedMemoryCache();
+            //services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
             {
@@ -107,7 +104,6 @@ namespace aspCart.Web
 
             services.AddTransient<IContactUsService, ContactUsService>();
 
-
             services.AddTransient<ViewHelper>();
             services.AddTransient<DataHelper>();
 
@@ -117,6 +113,8 @@ namespace aspCart.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseImageflow(new ImageflowMiddlewareOptions().SetMapWebRoot(true));
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -139,7 +137,7 @@ namespace aspCart.Web
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseRequestLocalization();
-            app.UseImageResize();
+            //app.UseImageResize();
             app.UseStatusCodePages();
             app.UseSession();
             //app.UseVisitorCounter();

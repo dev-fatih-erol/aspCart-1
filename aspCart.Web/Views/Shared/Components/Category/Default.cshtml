@@ -1,15 +1,88 @@
 ﻿@model IEnumerable<aspCart.Core.Domain.Catalog.Category>
-
-<ul class="navbar-nav">
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle my-1" href="#" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Categories
-        </a>
-        <div class="dropdown-menu" aria-labelledby="categoryDropdown">
-            @foreach (var category in Model)
-            {
-                <a asp-area="" asp-controller="Category" asp-action="@category.Name" class="dropdown-item">@category.Name</a>
-            }
+<div class="col-md-auto d-none d-xl-block">
+    <div class="max-width-270 min-width-270">
+        <!-- Basics Accordion -->
+        <div id="basicsAccordion">
+            <!-- Card -->
+            <div class="card border-0">
+                <div class="card-header card-collapse border-0 flex-center-between bg-primary text-lh-1 rounded-0" id="basicsHeadingOne">
+                    <div class="btn-link btn-remove-focus btn-block pl-4 py-3 card-btn shadow-none rounded-0 border-0 font-weight-bold text-gray-90"
+                         data-toggle="collapse"
+                         data-target="#basicsCollapseOne"
+                         aria-expanded="true"
+                         aria-controls="basicsCollapseOne">
+                        <span class="pl-1 text-gray-90">Departments</span>
+                    </div>
+                    <a href="#" class="d-block font-size-13 py-3 pr-4 font-weight-bold text-gray-90 ml-auto flex-shrink-0">View All</a>
+                </div>
+                <div id="basicsCollapseOne" class="collapse show vertical-menu rounded-0"
+                     aria-labelledby="basicsHeadingOne"
+                     data-parent="#basicsAccordion">
+                    <div class="card-body p-0">
+                        <nav class="js-mega-menu navbar navbar-expand-xl u-header__navbar u-header__navbar--no-space hs-menu-initialized">
+                            <div id="navBar" class="collapse navbar-collapse u-header__navbar-collapse">
+                                <ul class="navbar-nav u-header__navbar-nav">
+                                    @foreach (var category in Model)
+                                    {
+                                        <li class="nav-item u-header__nav-item"
+                                            data-event="hover"
+                                            data-position="left">
+                                            <a asp-area="" asp-controller="Category" asp-action="@category.Name" class="nav-link u-header__nav-link">@category.Name</a>
+                                        </li>
+                                    }
+                                    <li class="nav-item u-header__nav-item"
+                                        data-event="hover"
+                                        data-position="left">
+                                        <a href="#" class="nav-link u-header__nav-link">Value of the Day</a>
+                                    </li>
+                                    <li class="nav-item u-header__nav-item"
+                                        data-event="hover"
+                                        data-position="left">
+                                        <a href="#" class="nav-link u-header__nav-link">Top 100 Offers</a>
+                                    </li>
+                                    <li class="nav-item u-header__nav-item"
+                                        data-event="hover"
+                                        data-position="left">
+                                        <a href="#" class="nav-link u-header__nav-link">New Arrivals</a>
+                                    </li>
+                                    <li class="nav-item u-header__nav-item"
+                                        data-event="hover"
+                                        data-position="left">
+                                        <a href="#" class="nav-link u-header__nav-link">Value of the Day</a>
+                                    </li>
+                                    <li class="nav-item u-header__nav-item"
+                                        data-event="hover"
+                                        data-position="left">
+                                        <a href="#" class="nav-link u-header__nav-link">Top 100 Offers</a>
+                                    </li>
+                                    <li class="nav-item u-header__nav-item"
+                                        data-event="hover"
+                                        data-position="left">
+                                        <a href="#" class="nav-link u-header__nav-link">New Arrivals</a>
+                                    </li>
+                                    <li class="nav-item u-header__nav-item"
+                                        data-event="hover"
+                                        data-position="left">
+                                        <a href="#" class="nav-link u-header__nav-link">Value of the Day</a>
+                                    </li>
+                                    <li class="nav-item u-header__nav-item"
+                                        data-event="hover"
+                                        data-position="left">
+                                        <a href="#" class="nav-link u-header__nav-link">Top 100 Offers</a>
+                                    </li>
+                                    <li class="nav-item u-header__nav-item"
+                                        data-event="hover"
+                                        data-position="left">
+                                        <a href="#" class="nav-link u-header__nav-link">New Arrivals</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- End Card -->
         </div>
-    </li>
-</ul>
+        <!-- End Basics Accordion -->
+    </div>
+</div>

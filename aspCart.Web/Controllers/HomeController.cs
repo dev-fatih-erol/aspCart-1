@@ -57,6 +57,10 @@ namespace aspCart.Web.Controllers
             {
                 var productModel = _mapper.Map<Product, ProductModel>(product);
 
+                productModel.Categories = product.Categories
+                    .Select(x => new CategoryModel { Name = x.Category.Name, SeoUrl = x.Category.SeoUrl })
+                    .ToList();
+
                 // get main image
                 if(product.Images.Count > 0)
                 {
