@@ -1,0 +1,13 @@
+﻿@model IEnumerable<aspCart.Core.Domain.Catalog.Category>
+<div class="col-12 col-xl-auto pr-lg-2">
+    <div class="min-width-200 mt-xl-5">
+        <ul class="list-group list-group-flush flex-nowrap flex-xl-wrap flex-row flex-xl-column overflow-auto overflow-xl-visble mb-3 mb-xl-0 border-top border-color-1 border-lg-top-0">
+            @foreach (var category in Model)
+            {
+                <li class="border-color-1 list-group-item border-lg-down-0 flex-shrink-0 flex-xl-shrink-1">
+                    <a asp-area="" asp-controller="Category" asp-action="@category.Name" class="hover-on-bold py-1 px-3 text-gray-90 d-block">@category.Name</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

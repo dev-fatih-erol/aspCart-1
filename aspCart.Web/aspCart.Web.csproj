@@ -52,5 +52,7 @@
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\images\test_images\" />
     <Folder Include="wwwroot\images\system\" />
+    <Folder Include="Views\Shared\Components\PopulerCategory\" />
+    <Folder Include="Views\Shared\Components\PopulerCategoryProduct\" />
   </ItemGroup>
 </Project>

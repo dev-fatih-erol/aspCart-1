@@ -1,0 +1,76 @@
+﻿@model IEnumerable<ProductModel>
+@if (Model.Count() > 0)
+{
+    <div class="col-md pl-md-0">
+        <ul class="row list-unstyled products-group no-gutters mb-0">
+            @{int i = 1; }
+            @foreach (var product in Model)
+            {
+                    string cssClass = string.Empty;
+                    if (i == 3)
+                    {
+                        cssClass = "remove-divider-xl remove-divider-md-lg";
+                    }
+                    if (i == 4)
+                    {
+                        cssClass = "remove-divider-wd";
+                    }
+                    if (i == 6)
+                    {
+                        cssClass = "remove-divider-xl remove-divider-md-lg";
+                    }
+                    if (i == 7)
+                    {
+                        cssClass = "d-md-none d-wd-block";
+                    }
+                    if (i == 8)
+                    {
+                        cssClass = "remove-divider d-md-none d-wd-block";
+                    }
+                
+                <li class="col-6 col-md-4 col-wd-3 product-item @cssClass">
+                    <div class="product-item__outer h-100">
+                        <div class="product-item__inner bg-white p-3">
+                            <div class="product-item__body pb-xl-2">
+                                <div class="mb-2">
+                                    <a asp-area="" asp-controller="Category" asp-action="@product.Categories[0].Name" class="font-size-12 text-gray-5">@product.Categories[0].Name</a>
+                                </div>
+                                <h5 class="mb-1 product-item__title">
+                                    <a href="/Product/@product.SeoUrl" class="text-blue font-weight-bold" title="@product.Name">@product.Name</a>
+                                </h5>
+                                <div class="mb-2">
+                                    <a href="/Product/@product.SeoUrl" class="d-block text-center">
+                                        @if (product.MainImage != null)
+                                        {
+                                            <img class="img-fluid" src="@product.MainImage?w=155&h=147&mode=crop" alt="@product.Name" /> }
+                                        else
+                                        { <img class="img-fluid" src="~/images/system/no-image.png" alt="@product.Name" />}
+                                    </a>
+                                </div>
+                                <div class="flex-center-between mb-1">
+                                    <div class="prodcut-price">
+                                        <div class="text-gray-100">
+                                            @if (product.OldPrice > 0)
+                                            {@product.OldPrice.ToString("N2") <span>TL</span> }
+                                        else
+                                        {@Html.Raw(product.Price.ToString("N2")) <span>TL</span>}
+                                        </div>
+                                    </div>
+                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                        <form asp-area="" asp-controller="Cart" asp-action="Add" method="post">
+                                            <input type="hidden" value="@product.Id" name="id" />
+                                            <a href="#" onclick="this.closest('form').submit();return false;" class="btn-add-cart btn-primary transition-3d-hover">
+                                                <i class="ec ec-add-to-cart"></i>
+                                            </a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                i++;
+            }
+        </ul>
+    </div>
+}
