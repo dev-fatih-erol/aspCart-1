@@ -71,9 +71,12 @@ namespace aspCart.Web.Controllers
         // POST: /Cart/Add
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Add(Guid id)
+        public IActionResult Add(Guid id, int quantity)
         {
-            if(id == null)
+            if (quantity < 1)
+                return RedirectToAction("Index");
+
+            if (id == null)
                 return RedirectToAction("Index");
 
             // check if product exist
@@ -90,7 +93,7 @@ namespace aspCart.Web.Controllers
             // if the item is already in the cart,
             // increase the quantity by 1
             if (cartItems.Exists(x => x.Id == selectedItem.Id))
-                cartItems.Find(x => x.Id == selectedItem.Id).Quantity++;
+                cartItems.Find(x => x.Id == selectedItem.Id).Quantity += quantity;
             else
             {
                 var item = new CartItemModel
@@ -98,7 +101,7 @@ namespace aspCart.Web.Controllers
                     Id = selectedItem.Id,
                     Name = selectedItem.Name,
                     Price = selectedItem.Price,
-                    Quantity = 1,
+                    Quantity = quantity,
                     MaxCartQuantity = selectedItem.MaximumCartQuantity,
                     SeoUrl = selectedItem.SeoUrl
                 };

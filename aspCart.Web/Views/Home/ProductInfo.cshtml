@@ -70,14 +70,14 @@
                                 <a class="d-inline-flex align-items-center small font-size-15 text-lh-1" asp-controller="CreateReview" asp-action="@Model.Id">
                                     <div class="text-warning mr-2">
                                         @{ int activeStar = 0;
-                                                        int roundedRating = Convert.ToInt32(Math.Round(Model.Rating, 0, MidpointRounding.AwayFromZero)); }
+                                            int roundedRating = Convert.ToInt32(Math.Round(Model.Rating, 0, MidpointRounding.AwayFromZero)); }
                                         @for (int i = 0; i < roundedRating; i++)
                                         {
-                                    <small class="fas fa-star"></small>activeStar++;
-                                                }
+                            <small class="fas fa-star"></small>activeStar++;
+                        }
                                         @for (int i = 0; i < 5 - activeStar; i++)
                                         {
-                                    <small class="far fa-star text-muted"></small>}
+                            <small class="far fa-star text-muted"></small>}
                                     </div>
                                     <span class="text-secondary font-size-13">(@Model.ReviewCount değerlendirme)</span>
                                 </a>
@@ -87,15 +87,14 @@
                             <a href="https://www.facebook.com/sharer/sharer.php?u=@string.Format("{0}://{1}{2}{3}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path, Context.Request.QueryString)&t=@(Model.MetaTitle ?? Model.Name)" target="_blank" class="text-gray-6 font-size-13 mr-2"><i class="fab fa-facebook-f mr-1 font-size-15"></i> Facebook</a>
                             <a href="https://twitter.com/intent/tweet?url=@string.Format("{0}://{1}{2}{3}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path, Context.Request.QueryString)&text=@(Model.MetaTitle ?? Model.Name)" target="_blank" class="text-gray-6 font-size-13 ml-2"><i class="fab fa-twitter mr-1 font-size-15"></i> Twitter</a>
                             <a href="whatsapp://send?text=@string.Format("{0}://{1}{2}{3}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path, Context.Request.QueryString)&text=@(Model.MetaTitle ?? Model.Name)"
-                                       data-action="share/whatsapp/share" onClick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
-                                       target="_blank" class="text-gray-6 font-size-13 ml-2"><i class="fab fa-whatsapp mr-1 font-size-15"></i> WhatsApp</a>
+                               data-action="share/whatsapp/share" onClick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+                               target="_blank" class="text-gray-6 font-size-13 ml-2"><i class="fab fa-whatsapp mr-1 font-size-15"></i> WhatsApp</a>
                         </div>
                         <div class="mb-2">
                             <ul class="font-size-14 pl-3 ml-1 text-gray-110">
                                 @foreach (var spec in Model.Specifications.Take(5))
                                 {
-                                    <li>@Regex.Replace(spec.Value, @"<[^>]*>", String.Empty)</li>
-                                }
+                    <li>@Regex.Replace(spec.Value, @"<[^>]*>", String.Empty)</li>}
                             </ul>
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
@@ -103,37 +102,41 @@
                             <div class="d-flex align-items-baseline">
                                 @if (Model.OldPrice > 0)
                                 {
-                            <ins class="font-size-36 text-decoration-none">@Html.Raw(Model.Price.ToString("N2")) TL</ins>
-                                            <del class="font-size-20 text-gray-9 ml-2">@Model.OldPrice.ToString("N2") TL</del> }
-                                                        else
-                                                        {
-                                            <ins class="font-size-36 text-decoration-none">@Model.Price.ToString("N2") TL</ins>}
+                    <ins class="font-size-36 text-decoration-none">@Html.Raw(Model.Price.ToString("N2")) TL</ins>
+                                    <del class="font-size-20 text-gray-9 ml-2">@Model.OldPrice.ToString("N2") TL</del> }
+                                else
+                                {
+                    <ins class="font-size-36 text-decoration-none">@Model.Price.ToString("N2") TL</ins>}
                             </div>
                         </div>
-                        <div class="d-md-flex align-items-end mb-3">
-                            <div class="max-width-150 mb-4 mb-md-0">
-                                <!-- Quantity -->
-                                <div class="border rounded-pill py-2 px-3 border-color-1">
-                                    <div class="js-quantity row align-items-center">
-                                        <div class="col">
-                                            <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" value="1">
-                                        </div>
-                                        <div class="col-auto pr-1">
-                                            <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
-                                                <small class="fas fa-minus btn-icon__inner"></small>
-                                            </a>
-                                            <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
-                                                <small class="fas fa-plus btn-icon__inner"></small>
-                                            </a>
+
+                        <form asp-area="" asp-controller="Cart" asp-action="Add" method="post">
+                            <div class="d-md-flex align-items-end mb-3">
+                                <input type="hidden" value="@Model.Id" name="id" />
+                                <div class="max-width-150 mb-4 mb-md-0">
+                                    <!-- Quantity -->
+                                    <div class="border rounded-pill py-2 px-3 border-color-1">
+                                        <div class="js-quantity row align-items-center">
+                                            <div class="col">
+                                                <input name="quantity" class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" value="1">
+                                            </div>
+                                            <div class="col-auto pr-1">
+                                                <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
+                                                    <small class="fas fa-minus btn-icon__inner"></small>
+                                                </a>
+                                                <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
+                                                    <small class="fas fa-plus btn-icon__inner"></small>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
+                                    <!-- End Quantity -->
                                 </div>
-                                <!-- End Quantity -->
+                                <div class="ml-md-3">
+                                    <a onclick="this.closest('form').submit();return false;" href="#" class="btn px-5 btn-primary-dark transition-3d-hover"><i class="ec ec-add-to-cart mr-2 font-size-20"></i> Sepete Ekle</a>
+                                </div>
                             </div>
-                            <div class="ml-md-3">
-                                <a href="#" class="btn px-5 btn-primary-dark transition-3d-hover"><i class="ec ec-add-to-cart mr-2 font-size-20"></i> Add to Cart</a>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
