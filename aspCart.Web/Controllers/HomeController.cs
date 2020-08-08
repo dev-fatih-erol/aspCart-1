@@ -103,7 +103,9 @@ namespace aspCart.Web.Controllers
                 {
                     var productModel = _mapper.Map<Product, ProductModel>(productEntity);
                     productModel.Description = System.Net.WebUtility.HtmlDecode(productModel.Description);
-
+                    productModel.Categories = productEntity.Categories
+                    .Select(x => new CategoryModel { Name = x.Category.Name, SeoUrl = x.Category.SeoUrl })
+                    .ToList();
                     // check for discount
                     if (productEntity.SpecialPriceEndDate != null && productEntity.SpecialPriceEndDate >= DateTime.Now)
                     {

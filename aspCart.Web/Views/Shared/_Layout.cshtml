@@ -916,10 +916,9 @@
     <script src="https://transvelo.github.io/electro-html/2.0/assets/js/components/hs.svg-injector.js"></script>
     <script src="https://transvelo.github.io/electro-html/2.0/assets/js/components/hs.go-to.js"></script>
     <script src="https://transvelo.github.io/electro-html/2.0/assets/js/components/hs.selectpicker.js"></script>
+    @RenderSection("Scripts", required: false)
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    @RenderSection("Scripts", required: false)
 
     <!-- JS Plugins Init. -->
     <script>$(window).on('load', function () {
