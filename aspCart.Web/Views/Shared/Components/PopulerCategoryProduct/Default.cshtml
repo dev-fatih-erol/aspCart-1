@@ -50,10 +50,7 @@
                                 <div class="flex-center-between mb-1">
                                     <div class="prodcut-price">
                                         <div class="text-gray-100">
-                                            @if (product.OldPrice > 0)
-                                            {@product.OldPrice.ToString("N2") <span>TL</span> }
-                                        else
-                                        {@Html.Raw(product.Price.ToString("N2")) <span>TL</span>}
+                                            @product.Price.ToString("N2") <span>TL</span>
                                         </div>
                                     </div>
                                     <div class="d-none d-xl-block prodcut-add-cart">

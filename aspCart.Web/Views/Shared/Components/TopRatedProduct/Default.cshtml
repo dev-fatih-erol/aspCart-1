@@ -27,10 +27,7 @@
             </div>
             <div class="prodcut-price mt-auto">
                 <div class="font-size-15">
-                    @if (product.OldPrice > 0)
-                    {@product.OldPrice.ToString("N2") <span>TL</span> }
-                else
-                {@Html.Raw(product.Price.ToString("N2")) <span>TL</span>}
+                    @product.Price.ToString("N2") <span>TL</span>
                 </div>
             </div>
         </div>

@@ -57,5 +57,6 @@
     <Folder Include="Views\Shared\Components\RecommendationForYou\" />
     <Folder Include="Views\Shared\Components\TopRatedProduct\" />
     <Folder Include="Views\Shared\Components\OnsaleProduct\" />
+    <Folder Include="Views\Shared\Components\SpecialProduct\" />
   </ItemGroup>
 </Project>
