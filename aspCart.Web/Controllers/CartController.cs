@@ -74,7 +74,7 @@ namespace aspCart.Web.Controllers
         public IActionResult Add(Guid id, int quantity)
         {
             if (quantity < 1)
-                return RedirectToAction("Index");
+                quantity = 1;
 
             if (id == null)
                 return RedirectToAction("Index");
