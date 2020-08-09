@@ -1,8 +1,6 @@
 ﻿@model ProductModel
 @using System.Text.RegularExpressions
-
 @{ ViewData["Title"] = @Model.MetaTitle ?? Model.Name;
-    var description = false;
     var imgIndex = 0;
     var mainImageSrc = "/images/system/no-image.png"; }
 <main id="content" role="main">
@@ -180,7 +178,7 @@
         </div>
         <!-- End Single Product Tab -->
         <!-- Related products -->
-        @await Component.InvokeAsync("RecommendationForYou")
+        @await Component.InvokeAsync("SimilarProduct")
         <!-- End Related products -->
         <!-- Brand Carousel -->
         <div class="mb-8">

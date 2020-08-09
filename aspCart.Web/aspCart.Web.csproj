@@ -58,5 +58,6 @@
     <Folder Include="Views\Shared\Components\TopRatedProduct\" />
     <Folder Include="Views\Shared\Components\OnsaleProduct\" />
     <Folder Include="Views\Shared\Components\SpecialProduct\" />
+    <Folder Include="Views\Shared\Components\SimilarProduct\" />
   </ItemGroup>
 </Project>
