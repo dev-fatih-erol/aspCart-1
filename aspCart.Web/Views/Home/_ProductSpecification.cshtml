@@ -9,8 +9,8 @@
                     @foreach (var specification in Model.Specifications)
                     {
                         <tr>
-                            <th class="px-4 px-xl-5 border-top-0">@specification.Key</th>
-                            <td class='(@i == 0 ? "border-top-0" : "")'>@Html.Raw(specification.Value)</td>
+                            <th class="px-4 px-xl-5 @(i == 0 ? "border-top-0" : "")">@specification.Key</th>
+                            <td class="@(i == 0 ? "border-top-0" : "")">@Html.Raw(specification.Value)</td>
                         </tr>
                         i++;
                     }
