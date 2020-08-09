@@ -11,6 +11,7 @@ using aspCart.Infrastructure.EFModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using aspCart.Core.Interface.Services.Sale;
+using System.Text.RegularExpressions;
 
 namespace aspCart.Web.Controllers
 {
@@ -399,7 +400,9 @@ namespace aspCart.Web.Controllers
                             var r = _mapper.Map<Review, ReviewModel>(review);
 
                             var user = await _userManager.FindByIdAsync(review.UserId.ToString());
-                            r.Username = await _userManager.GetUserNameAsync(user);
+                            var userName = await _userManager.GetUserNameAsync(user);
+                            string pattern = @"(?<=[\w]{1})[\w-\._\+%]*(?=[\w]{1}@)";
+                            r.Username = Regex.Replace(userName, pattern, m => new string('*', m.Length));
 
                             r.IsVerifiedOwner = _orderService.GetAllOrdersByUserId(review.UserId)
                                 .Where(x => x.Items.Any(a => a.ProductId == result.ToString()) && x.Status == Core.Domain.Sale.OrderStatus.Complete)

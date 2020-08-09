@@ -258,34 +258,21 @@
 
         });</script>
     <script>
-    $(function () {
-        var template = `
-            <tr>
-                <th>
-                    <ul>
-                        <li class ="r-user">_user_placeholder</li>
-                        <li class ="r-date">_date_placeholder</li>
-                        <li class ="r-verified">_verified_placeholder</li>
-                    </ul>
-                </th>
-                <td>
-                    <div>
-                        _star_placeholder
-                        <span class ="review-title">_title_placeholder</span>
-                    </div>
-                    <div class ="review-message">
-                        <p>_message_placeholder</p>
-                        <span class ="date-edited text-muted">_date_modified_placeholder</span>
-                    </div>
-                    <p class ="helpful text-muted">
-                        Did you find this review helpful?
-                        <button class ="btn btn-sm btn-secondary">Yes</button>
-                        <button class ="btn btn-sm btn-secondary">No</button>
-                    </p>
-                </td>
-            </tr>
-        `
-      
+        $(function () {
+            var template = ''
+                + '<div class="border-bottom border-color-1 pb-4 mb-4 review-uniq"> '
+                + '        <div class="d-flex justify-content-between align-items-center text-secondary font-size-1 mb-2"> '
+                + '            <div class="text-warning text-ls-n2 font-size-16" style="width: 80px;">_star_placeholder</div>'
+                + '        </div> '
+                + '        <h2 class="font-size-25 text-lh-1dot2">_title_placeholder</h2>'
+                + '        <p class="text-gray-90">_message_placeholder</p> '
+                + '        <div class="mb-2"> '
+                + '            <strong>_user_placeholder</strong> '
+                + '            <span class="font-size-13 text-gray-23"> - _date_placeholder - </span> '
+                + '            <span>_verified_placeholder</span> '
+                + '        </div> '
+                + '    </div>';
+
                     $.ajax({
                     type: 'GET',
                     url: '/home/productreview/@Model.Id',
@@ -305,9 +292,9 @@
                                 else
                                     review = review.replace('_date_modified_placeholder', '');
                                 if (item.isVerifiedOwner)
-                                    review = review.replace('_verified_placeholder', '<i class ="fa fa-check verified-check"></i> Verified Purchase');
+                                    review = review.replace('_verified_placeholder', '<span class="font-size-13 text-success"><i class ="fas fa-check"></i> Satın alma doğrulandı</span>');
                                 else
-                                    review = review.replace('_verified_placeholder', '<i class ="fa fa-close verified-x"></i> Verified Purchase');
+                                    review = review.replace('_verified_placeholder', '<span class="font-size-13 text-danger"><i class ="fas fa-times"></i> Satın alma doğrulanamadı</span>');
                                 switch (item.rating) {
                                     case 1: one++; break;
                                     case 2: two++; break;
@@ -316,30 +303,50 @@
                                     case 5: five++; break;
                                 }
                                 $('#review-container').append(review);
+                                $('.review-uniq')
+                                    .last()
+                                    .removeClass("border-bottom")
+                                    .removeClass("border-color-1")
+                                    .removeClass("mb-4")
+                                    .removeClass("pb-4");
                             });
                         } else {
                             $('#review-container').append('<h5 style="text-align: center; padding: 20px;">There are no reviews yet...</div>');
                         }
-                        
+
                         $('#one-star').empty();
-                        $('#one-star').append(one / data.length * 100 + '% (' + one + ')');
+                        $('#one-star').append("%" + (isNaN(one / data.length * 100) ? 0 : one / data.length * 100) + ' (' + one + ')');
+                        var oneStarProgress = "<div class=\"progress-bar\" role=\"progressbar\" style=\"width: " + '' + (isNaN(one / data.length * 100) ? 0 : one / data.length * 100) + '%' + ";\" aria-valuenow=\"" + (isNaN(one / data.length * 100) ? 0 : one / data.length * 100) + "\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>";
+                        $('#one-star-progress').append(oneStarProgress);
+
                         $('#two-star').empty();
-                        $('#two-star').append(two / data.length * 100 + '% (' + two + ')');
+                        $('#two-star').append("%" + (isNaN(two / data.length * 100) ? 0 : two / data.length * 100) + ' (' + two + ')');
+                        var twoStarProgress = "<div class=\"progress-bar\" role=\"progressbar\" style=\"width: " + '' + (isNaN(two / data.length * 100) ? 0 : two / data.length * 100) + '%' + ";\" aria-valuenow=\"" + (isNaN(two / data.length * 100) ? 0 : two / data.length * 100) + "\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>";
+                        $('#two-star-progress').append(twoStarProgress);
+
                         $('#three-star').empty();
-                        $('#three-star').append(three / data.length * 100 + '% (' + three + ')');
+                        $('#three-star').append("%" + (isNaN(three / data.length * 100) ? 0 : three / data.length * 100) + ' (' + three + ')');
+                        var threeStarProgress = "<div class=\"progress-bar\" role=\"progressbar\" style=\"width: " + '' + (isNaN(three / data.length * 100) ? 0 : three / data.length * 100) + '%' + ";\" aria-valuenow=\"" + (isNaN(three / data.length * 100) ? 0 : three / data.length * 100)  + "\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>";
+                        $('#three-star-progress').append(threeStarProgress);
+
                         $('#four-star').empty();
-                        $('#four-star').append(four / data.length * 100 + '% (' + four + ')');
+                        $('#four-star').append("%" + (isNaN(four / data.length * 100) ? 0 : four / data.length * 100) + ' (' + four + ')');
+                        var fourStarProgress = "<div class=\"progress-bar\" role=\"progressbar\" style=\"width: " + '' + (isNaN(four / data.length * 100) ? 0 : four / data.length * 100) + '%' + ";\" aria-valuenow=\"" + (isNaN(four / data.length * 100) ? 0 : four / data.length * 100) + "\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>";
+                        $('#four-star-progress').append(fourStarProgress);
+
                         $('#five-star').empty();
-                        $('#five-star').append(five / data.length * 100 + '% (' + five + ')');
+                        $('#five-star').append("%" + (isNaN(five / data.length * 100) ? 0 : five / data.length * 100) + ' (' + five + ')');
+                        var fiveStarProgress = "<div class=\"progress-bar\" role=\"progressbar\" style=\"width: " + '' + (isNaN(five / data.length * 100) ? 0 : five / data.length * 100) + '%' + ";\" aria-valuenow=\"" + (isNaN(five / data.length * 100) ? 0 : five / data.length * 100) + "\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>";
+                        $('#five-star-progress').append(fiveStarProgress);
                     }
                 });
         function createStar(count) {
             let starTemplate = '';
             for (i = 0; i < count; i++) {
-                starTemplate += '<small class="fas fa-star"></small>';
+                starTemplate += '<small class="fas fa-star"></small> ';
             }
             for (i = 0; i < 5 - count; i++) {
-                starTemplate += '<small class="fas fa-star text-muted"></small>';
+                starTemplate += '<small class="far fa-star text-muted"></small> ';
             }
             return starTemplate;
         };
