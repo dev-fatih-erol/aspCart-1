@@ -71,10 +71,10 @@ namespace aspCart.Web.Controllers
         // POST: /Cart/Add
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Add(Guid id, int quantity)
+        public IActionResult Add(Guid id, int quantity = 1)
         {
             if (quantity < 1)
-                quantity = 1;
+                return RedirectToAction("Index");
 
             if (id == null)
                 return RedirectToAction("Index");
