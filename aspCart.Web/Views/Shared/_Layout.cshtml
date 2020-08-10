@@ -33,6 +33,19 @@
 
     <!-- CSS Electro Template -->
     <link rel="stylesheet" href="/assets/css/theme.css">
+    <style>
+        .field-validation-error {
+            width: 100%;
+            margin-top: 0.25rem;
+            font-size: 80%;
+            color: #de4437;
+            display:block;
+        }
+        input.input-validation-error {
+            box-shadow: 0 0 10px rgba(222, 68, 55, 0.1) !important;
+            border-color: rgba(222, 68, 55, 0.5) !important;
+        }
+    </style>
 </head>
 <body>
     <!-- ========== HEADER ========== -->
@@ -860,7 +873,6 @@
     <script src="/assets/vendor/hs-megamenu/src/hs.megamenu.js"></script>
     <script src="/assets/vendor/svg-injector/dist/svg-injector.min.js"></script>
     <script src="/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="/assets/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
     <script src="/assets/vendor/typed.js/lib/typed.min.js"></script>
     <script src="/assets/vendor/slick-carousel/slick/slick.js"></script>
@@ -933,15 +945,6 @@
 
             // initialization of forms
             $.HSCore.components.HSFocusState.init();
-
-            // initialization of form validation
-            $.HSCore.components.HSValidation.init('.js-validate', {
-                rules: {
-                    confirmPassword: {
-                        equalTo: '#signupPassword'
-                    }
-                }
-            });
 
             // initialization of show animations
             $.HSCore.components.HSShowAnimation.init('.js-animation-link');
