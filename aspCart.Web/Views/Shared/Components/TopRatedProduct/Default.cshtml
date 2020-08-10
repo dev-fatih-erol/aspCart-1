@@ -16,13 +16,18 @@
                 <a href="/Product/@product.SeoUrl" class="text-blue font-weight-bold" title="@product.Name">@product.Name</a>
             </h5>
             <div class="text-warning mb-2">
-                @for (int i = 0; i < Math.Ceiling(product.Rating); i++)
+                @{
+                    int activeStar = 0;
+                    int roundedRating = Convert.ToInt32(Math.Round(product.Rating, 0, MidpointRounding.AwayFromZero));
+                }
+                @for (int i = 0; i < roundedRating; i++)
                 {
                     <small class="fas fa-star"></small>
+                    activeStar++;
                 }
-                @for (int i = 0; i < 5 - Math.Ceiling(product.Rating); i++)
+                @for (int i = 0; i < 5 - activeStar; i++)
                 {
-                    <small class="fas fa-star text-muted"></small>
+                     <small class="fas fa-star text-muted"></small>
                 }
             </div>
             <div class="prodcut-price mt-auto">
