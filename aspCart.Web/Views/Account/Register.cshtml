@@ -23,14 +23,14 @@
 
         <div class="container">
             <div class="mb-4">
-                <h1 class="text-center">My Account</h1>
+                <h1 class="text-center">Hesabım</h1>
             </div>
             <div class="my-4 my-xl-8">
                 <div class="row">
                     <div class="col-md-5 ml-xl-auto mr-md-auto mr-xl-0 mb-8 mb-md-0">
                         <!-- Title -->
                         <div class="border-bottom border-color-1 mb-6">
-                            <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Login</h3>
+                            <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Kaydol</h3>
                         </div>
                         <p class="text-gray-90 mb-4">Welcome back! Sign in to your account.</p>
                         <!-- End Title -->
@@ -39,34 +39,34 @@
                             <!-- Form Group -->
                             <div class="js-form-message form-group">
                                 <label asp-for="Email" class="form-label">
-                                    Username or Email address
+                                    E-posta Adresi
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input asp-for="Email" class="form-control" placeholder="Username or Email address">
+                                <input asp-for="Email" class="form-control" placeholder="E-posta Adresi">
                                 <span asp-validation-for="Email"></span>
                             </div>
                             <!-- End Form Group -->
                             <!-- Form Group -->
                             <div class="js-form-message form-group">
-                                <label asp-for="Password" class="form-label">Password <span class="text-danger">*</span></label>
-                                <input asp-for="Password" class="form-control" placeholder="Password">
+                                <label asp-for="Password" class="form-label">Şifre <span class="text-danger">*</span></label>
+                                <input asp-for="Password" class="form-control" placeholder="Şifre">
                                 <span asp-validation-for="Password"></span>
                             </div>
                             <!-- End Form Group -->
                             <!-- Checkbox -->
                             <div class="js-form-message form-group">
-                                <label asp-for="ConfirmPassword" class="form-label">Password <span class="text-danger">*</span></label>
-                                <input asp-for="ConfirmPassword" class="form-control" placeholder="Password">
+                                <label asp-for="ConfirmPassword" class="form-label">Şifre Tekrarı <span class="text-danger">*</span></label>
+                                <input asp-for="ConfirmPassword" class="form-control" placeholder="Şifre Tekrarı">
                                 <span asp-validation-for="ConfirmPassword"></span>
                             </div>
                             <!-- End Checkbox -->
                             <!-- Button -->
                             <div class="mb-1">
                                 <div class="mb-3">
-                                    <button type="submit" class="btn btn-primary-dark-w px-5">Login</button>
+                                    <button type="submit" class="btn btn-primary-dark-w px-5">Kaydol</button>
                                 </div>
                                 <div class="mb-2">
-                                    <a class="text-blue" href="#">Lost your password?</a>
+                                    <a class="text-blue" href="#">Şifremi Unuttum</a>
                                 </div>
                             </div>
                             <!-- End Button -->
@@ -75,38 +75,21 @@
                     <div class="col-md-1 d-none d-md-block">
                         <div class="flex-content-center h-100">
                             <div class="width-1 bg-1 h-100"></div>
-                            <div class="width-50 height-50 border border-color-1 rounded-circle flex-content-center font-italic bg-white position-absolute">or</div>
+                            <div class="width-50 height-50 border border-color-1 rounded-circle flex-content-center font-italic bg-white position-absolute">veya</div>
                         </div>
                     </div>
                     <div class="col-md-5 ml-md-auto ml-xl-0 mr-xl-auto">
                         <!-- Title -->
                         <div class="border-bottom border-color-1 mb-6">
-                            <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Register</h3>
+                            <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Giriş Yap</h3>
                         </div>
                         <p class="text-gray-90 mb-4">Create new account today to reap the benefits of a personalized shopping experience.</p>
                         <!-- End Title -->
-                        <!-- Form Group -->
-                        <form class="js-validate" novalidate="novalidate">
-                            <div class="js-form-message form-group mb-5">
-                                <label class="form-label" for="RegisterSrEmailExample3">
-                                    Email address
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input type="email" class="form-control" name="email" id="RegisterSrEmailExample3" placeholder="Email address" aria-label="Email address" required
-                                       data-msg="Please enter a valid email address."
-                                       data-error-class="u-has-error"
-                                       data-success-class="u-has-success">
+                        <div class="mb-6">
+                            <div class="mb-3">
+                                <a asp-area="" asp-controller="Account" asp-action="Login" class="btn btn-primary-dark-w px-5">Şimdi Giriş Yap</a>
                             </div>
-                            <!-- End Form Group -->
-                            <p class="text-gray-90 mb-4">Your personal data will be used to support your experience throughout this website, to manage your account, and for other purposes described in our <a href="#" class="text-blue">privacy policy.</a></p>
-                            <!-- Button -->
-                            <div class="mb-6">
-                                <div class="mb-3">
-                                    <button type="submit" class="btn btn-primary-dark-w px-5">Register</button>
-                                </div>
-                            </div>
-                            <!-- End Button -->
-                        </form>
+                        </div>
                         <h3 class="font-size-18 mb-3">Sign up today and you will be able to :</h3>
                         <ul class="list-group list-group-borderless">
                             <li class="list-group-item px-0"><i class="fas fa-check mr-2 text-green font-size-16"></i> Speed your way through checkout</li>
