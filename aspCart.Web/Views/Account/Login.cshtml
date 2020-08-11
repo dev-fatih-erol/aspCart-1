@@ -1,75 +1,123 @@
-﻿@using Microsoft.Extensions.Options
-@model LoginViewModel
-@inject SignInManager<ApplicationUser> SignInManager
-@inject IOptions<AdminAccount> AdminAccount
-@inject IOptions<UserAccount> UserAccount
+﻿@model LoginViewModel
 
 @{
     ViewData["Title"] = "Log in";
 }
+<main id="content" role="main">
+    <!-- breadcrumb -->
+    <div class="bg-gray-13 bg-md-transparent">
+        <div class="container">
+            <!-- breadcrumb -->
+            <div class="my-md-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="../home/index.html">Home</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">My Account</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End breadcrumb -->
+        </div>
+    </div>
+    <!-- End breadcrumb -->
 
-<!-- Breadcrumb Area start -->
-<section class="breadcrumb-area">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="breadcrumb-content">
-                    <h1 class="breadcrumb-hrading">Login Page</h1>
-                    <ul class="breadcrumb-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li>Login</li>
+        <div class="mb-4">
+            <h1 class="text-center">My Account</h1>
+        </div>
+        <div class="my-4 my-xl-8">
+            <div class="row">
+                <div class="col-md-5 ml-xl-auto mr-md-auto mr-xl-0 mb-8 mb-md-0">
+                    <!-- Title -->
+                    <div class="border-bottom border-color-1 mb-6">
+                        <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Login</h3>
+                    </div>
+                    <p class="text-gray-90 mb-4">Welcome back! Sign in to your account.</p>
+                    <!-- End Title -->
+                    <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="js-validate">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <!-- Form Group -->
+                        <div class="js-form-message form-group">
+                            <label asp-for="Email" class="form-label">
+                                Username or Email address
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="Email" class="form-control" placeholder="Username or Email address">
+                            <span asp-validation-for="Email"></span>
+                        </div>
+                        <!-- End Form Group -->
+                        <!-- Form Group -->
+                        <div class="js-form-message form-group">
+                            <label asp-for="Password" class="form-label">Password <span class="text-danger">*</span></label>
+                            <input asp-for="Password" class="form-control" placeholder="Password">
+                            <span asp-validation-for="Password"></span>
+                        </div>
+                        <!-- End Form Group -->
+                        <!-- Checkbox -->
+                        <div class="js-form-message mb-3">
+                            <div class="custom-control custom-checkbox d-flex align-items-center">
+                                <input type="checkbox" class="custom-control-input" id="rememberCheckbox" name="rememberCheckbox">
+                                <label class="custom-control-label form-label" for="rememberCheckbox">
+                                    Remember me
+                                </label>
+                            </div>
+                        </div>
+                        <!-- End Checkbox -->
+                        <!-- Button -->
+                        <div class="mb-1">
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary-dark-w px-5">Login</button>
+                            </div>
+                            <div class="mb-2">
+                                <a class="text-blue" href="#">Lost your password?</a>
+                            </div>
+                        </div>
+                        <!-- End Button -->
+                    </form>
+                </div>
+                <div class="col-md-1 d-none d-md-block">
+                    <div class="flex-content-center h-100">
+                        <div class="width-1 bg-1 h-100"></div>
+                        <div class="width-50 height-50 border border-color-1 rounded-circle flex-content-center font-italic bg-white position-absolute">or</div>
+                    </div>
+                </div>
+                <div class="col-md-5 ml-md-auto ml-xl-0 mr-xl-auto">
+                    <!-- Title -->
+                    <div class="border-bottom border-color-1 mb-6">
+                        <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Register</h3>
+                    </div>
+                    <p class="text-gray-90 mb-4">Create new account today to reap the benefits of a personalized shopping experience.</p>
+                    <!-- End Title -->
+                    <!-- Form Group -->
+                    <form class="js-validate" novalidate="novalidate">
+                        <div class="js-form-message form-group mb-5">
+                            <label class="form-label" for="RegisterSrEmailExample3">
+                                Email address
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="email" class="form-control" name="email" id="RegisterSrEmailExample3" placeholder="Email address" aria-label="Email address" required
+                                   data-msg="Please enter a valid email address."
+                                   data-error-class="u-has-error"
+                                   data-success-class="u-has-success">
+                        </div>
+                        <!-- End Form Group -->
+                        <p class="text-gray-90 mb-4">Your personal data will be used to support your experience throughout this website, to manage your account, and for other purposes described in our <a href="#" class="text-blue">privacy policy.</a></p>
+                        <!-- Button -->
+                        <div class="mb-6">
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary-dark-w px-5">Register</button>
+                            </div>
+                        </div>
+                        <!-- End Button -->
+                    </form>
+                    <h3 class="font-size-18 mb-3">Sign up today and you will be able to :</h3>
+                    <ul class="list-group list-group-borderless">
+                        <li class="list-group-item px-0"><i class="fas fa-check mr-2 text-green font-size-16"></i> Speed your way through checkout</li>
+                        <li class="list-group-item px-0"><i class="fas fa-check mr-2 text-green font-size-16"></i> Track your orders easily</li>
+                        <li class="list-group-item px-0"><i class="fas fa-check mr-2 text-green font-size-16"></i> Keep a record of all your purchases</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-</section>
-<!-- Breadcrumb Area End -->
-<!-- login area start -->
-<div class="login-register-area mb-60px mt-53px">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 col-md-12 ml-auto mr-auto">
-                <div class="login-register-wrapper">
-                    <div class="login-register-tab-list nav">
-                        <a class="active" data-toggle="tab" href="#lg1">
-                            <h4>login</h4>
-                        </a>
-                    </div>
-                    <div class="tab-content">
-                        <div id="lg1" class="tab-pane active">
-                            <div class="login-form-container">
-                                <div class="login-register-form">
-                                    <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" id="loginForm" method="post" class="form-horizontal">
-                                        <div asp-validation-summary="All" class="text-danger"></div>
-                                        <input asp-for="Email" class="form-control" placeholder="Email Address" />
-                                        <span asp-validation-for="Email" class="text-danger"></span>
-                                        <input asp-for="Password" class="form-control" placeholder="Password" />
-                                        <span asp-validation-for="Password" class="text-danger"></span>
-                                        <div class="button-box">
-                                            <div class="login-toggle-btn">
-                                                <input type="checkbox" />
-                                                <a class="flote-none" href="javascript:void(0)">Remember me</a>
-                                                <a href="#">Forgot Password?</a>
-                                            </div>
-                                            <button type="submit" style="float: right;"><span>Login</span></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @section Scripts {
-            @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-        }
-        AdminAccount.Email: @Html.Raw(AdminAccount.Value.Email)<br />
-        AdminAccount.Password: @Html.Raw(AdminAccount.Value.Password)<br />
-        UserAccount.Password: @Html.Raw(UserAccount.Value.Email)<br />
-        AdminAccount.Password: @Html.Raw(UserAccount.Value.Password)<br />
-
-    </div>
-</div>
-<!-- login area end -->
+</main>

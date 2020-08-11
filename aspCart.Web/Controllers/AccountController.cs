@@ -30,21 +30,6 @@ namespace aspCart.Web.Controllers
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult LoginOrRegister(string returnUrl = null)
-        {
-            if (returnUrl != null)
-            {
-                var url = returnUrl.ToLower();
-                if (url.StartsWith("/admin"))
-                    return RedirectToAction("Login", "Account", new { area = "Admin", returnUrl = returnUrl });
-            }
-
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
         // GET: /Account/AccessDenied
         public IActionResult AccessDenied()
         {
