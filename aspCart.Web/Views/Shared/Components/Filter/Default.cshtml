@@ -1,15 +1,15 @@
 ﻿@model FilterViewModel
 
-@{ 
+@{
     var formController = "";
     var formAction = "";
 
-    if(Model.FilterType == "name")
+    if (Model.FilterType == "name")
     {
         formController = "Home";
         formAction = "ProductSearch";
     }
-    if(Model.FilterType == "manufacturer")
+    if (Model.FilterType == "manufacturer")
     {
         formController = "Manufacturer";
         formAction = "ManufacturerInfo";
@@ -20,69 +20,235 @@
         formAction = "ProductCategory";
     }
 }
-
-<h5>Item filter</h5><br />
 <form id="filterForm" asp-area="" asp-controller="@formController" asp-action="@formAction" method="get">
-    @if (Model.ManufacturerFilterViewModel.Count > 0)
-    {
-        <h6>Manufacturer</h6> <!-- category filter -->
-        <hr />
-        @foreach (var manufacturer in Model.ManufacturerFilterViewModel)
+    <div class="mb-6">
+        <div class="border-bottom border-color-1 mb-5">
+            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Popüler Filtreler</h3>
+        </div>
+        @if (Model.ManufacturerFilterViewModel.Count > 0)
         {
-            string labelVaue = $"{manufacturer.Name} ({manufacturer.Quantity})";
+            <div class="border-bottom pb-4 mb-4">
+                <h4 class="font-size-14 mb-3 font-weight-bold">Üretici</h4>
 
-            <div>
-                <input type="checkbox" id="@manufacturer.Name" name="Manufacturer" value="@manufacturer.Name" />
-                <label for="@manufacturer.Name">@labelVaue</label>
+                <!-- View More - Collapse -->
+
+                @if (Model.ManufacturerFilterViewModel.Count() > 3)
+                {
+                    @foreach (var manufacturer in Model.ManufacturerFilterViewModel.Take(3))
+                    {
+                        var isChecked = Context.Request.Query["Manufacture"].Any(x => x == manufacturer.Name);
+                        <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" @((isChecked ? "checked" : ""))  id="@manufacturer.Name" name="Manufacture" value="@manufacturer.Name">
+                                <label class="custom-control-label" for="@manufacturer.Name">
+                                    @manufacturer.Name
+                                    <span class="text-gray-25 font-size-12 font-weight-normal"> (@manufacturer.Quantity)</span>
+                                </label>
+                            </div>
+                        </div>
+                    }
+                    <div class="collapse" id="collapseManufacturer">
+                        @foreach (var manufacturer in Model.ManufacturerFilterViewModel.Skip(3))
+                        {
+                            var isChecked = Context.Request.Query["Manufacture"].Any(x => x == manufacturer.Name);
+                            <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" @((isChecked ? "checked" : ""))  id="@manufacturer.Name" name="Manufacture" value="@manufacturer.Name">
+                                    <label class="custom-control-label" for="@manufacturer.Name">
+                                        @manufacturer.Name
+                                        <span class="text-gray-25 font-size-12 font-weight-normal"> (@manufacturer.Quantity)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!-- Link -->
+                    <a class="link link-collapse small font-size-13 text-gray-27 d-inline-flex mt-2" data-toggle="collapse" href="#collapseManufacturer" role="button" aria-expanded="false" aria-controls="collapseManufacturer">
+                        <span class="link__icon text-gray-27 bg-white">
+                            <span class="link__icon-inner">+</span>
+                        </span>
+                        <span class="link-collapse__default">Daha fazla göster</span>
+                        <span class="link-collapse__active">Daha az göster</span>
+                    </a>
+                    <!-- End Link -->
+                }
+                else
+                {
+                    @foreach (var manufacturer in Model.ManufacturerFilterViewModel)
+                    {
+                        var isChecked = Context.Request.Query["Manufacture"].Any(x => x == manufacturer.Name);
+                        <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" @((isChecked ? "checked" : ""))  id="@manufacturer.Name" name="Category" value="@manufacturer.Name">
+                                <label class="custom-control-label" for="@manufacturer.Name">
+                                    @manufacturer.Name
+                                    <span class="text-gray-25 font-size-12 font-weight-normal"> (@manufacturer.Quantity)</span>
+                                </label>
+                            </div>
+                        </div>
+                    }
+                }
+                <!-- End View More - Collapse -->
             </div>
         }
-        <button type="submit" class="btn btn-sm btn-primary">Apply</button>
-
-        <br /><br />
-    }
-
-    @if(Model.FilterType == "name")
-    {
-        <input type="hidden" name="name" value="@ViewData["name"]" />
-    }
-    @if (Model.CategoryFilterViewModel.Count > 0)
-    {
-        <h6>Category</h6> <!-- category filter -->
-        <hr />
-        @foreach (var category in Model.CategoryFilterViewModel)
+        @if (Model.FilterType == "name")
         {
-            string labelVaue = $"{category.Name} ({category.Quantity})";
+            <input type="hidden" name="name" value="@ViewData["name"]" />
+        }
+        @if (Model.CategoryFilterViewModel.Count > 0)
+        {
+            <div class="border-bottom pb-4 mb-4">
+                <h4 class="font-size-14 mb-3 font-weight-bold">Kategoriler</h4>
 
-            <div>
-                <input type="checkbox" id="@category.Name" name="Category" value="@category.Name" />
-                <label for="@category.Name">@labelVaue</label>
+                <!-- View More - Collapse -->
+
+                @if (Model.CategoryFilterViewModel.Count() > 3)
+                {
+                    @foreach (var category in Model.CategoryFilterViewModel.Take(3))
+                    {
+                        var isChecked = Context.Request.Query["Category"].Any(x => x == category.Name);
+                        <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" @((isChecked ? "checked" : "")) id="@category.Name" name="Category" value="@category.Name">
+                                <label class="custom-control-label" for="@category.Name">
+                                    @category.Name
+                                    <span class="text-gray-25 font-size-12 font-weight-normal"> (@category.Quantity)</span>
+                                </label>
+                            </div>
+                        </div>
+                    }
+                    <div class="collapse" id="collapseCategory">
+                        @foreach (var category in Model.CategoryFilterViewModel.Skip(3))
+                        {
+                            var isChecked = Context.Request.Query["Category"].Any(x => x == category.Name);
+                            <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" @((isChecked ? "checked" : "")) id="@category.Name" name="Category" value="@category.Name">
+                                    <label class="custom-control-label" for="@category.Name">
+                                        @category.Name
+                                        <span class="text-gray-25 font-size-12 font-weight-normal"> (@category.Quantity)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!-- Link -->
+                    <a class="link link-collapse small font-size-13 text-gray-27 d-inline-flex mt-2" data-toggle="collapse" href="#collapseCategory" role="button" aria-expanded="false" aria-controls="collapseCategory">
+                        <span class="link__icon text-gray-27 bg-white">
+                            <span class="link__icon-inner">+</span>
+                        </span>
+                        <span class="link-collapse__default">Daha fazla göster</span>
+                        <span class="link-collapse__active">Daha az göster</span>
+                    </a>
+                    <!-- End Link -->
+                }
+                else
+                {
+                    @foreach (var category in Model.CategoryFilterViewModel)
+                    {
+                        var isChecked = Context.Request.Query["Category"].Any(x => x == category.Name);
+                        <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" @((isChecked ? "checked" : "")) id="@category.Name" name="Category" value="@category.Name">
+                                <label class="custom-control-label" for="@category.Name">
+                                    @category.Name
+                                    <span class="text-gray-25 font-size-12 font-weight-normal"> (@category.Quantity)</span>
+                                </label>
+                            </div>
+                        </div>
+                    }
+                }
+                <!-- End View More - Collapse -->
             </div>
         }
-        <button type="submit" class="btn btn-sm btn-primary">Apply</button>
-
-        <br /><br />
-    }
-
-    @if (Model.PriceGroupings.Count() > 0)
-    {
-        <h6>Price</h6> <!-- price filter -->
-        <hr />
-        @foreach (var g in Model.PriceGroupings)
+        @if (Model.PriceGroupings.Count() > 0)
         {
-            int keyIndex = Model.PriceRange.IndexOf(g.Key);
-            int prevIndex = keyIndex - (keyIndex == 0 ? 0 : 1);
-            string minPrice = Model.PriceRange[prevIndex].ToString();
-            string maxPrice = g.Key.ToString();
-            string labelValue = $"{minPrice} - {maxPrice} ({g.Count()})";
+            <div class="border-bottom pb-4 mb-4">
+                <h4 class="font-size-14 mb-3 font-weight-bold">Fiyat</h4>
 
-            <div>
-                <input type="checkbox" id="@minPrice-@maxPrice" name="Price" value="@minPrice-@maxPrice" />
-                <label for="@minPrice-@maxPrice">@labelValue</label>
+                <!-- View More - Collapse -->
+
+                @if (Model.PriceGroupings.Count() > 3)
+                {
+                    @foreach (var g in Model.PriceGroupings.Take(3))
+                    {
+                        int keyIndex = Model.PriceRange.IndexOf(g.Key);
+                        int prevIndex = keyIndex - (keyIndex == 0 ? 0 : 1);
+                        string minPrice = Model.PriceRange[prevIndex].ToString();
+                        string maxPrice = g.Key.ToString();
+                        string labelValue = $"{minPrice} - {maxPrice}";
+
+                        var isChecked = Context.Request.Query["Price"].Any(x => x == minPrice + "-" + @maxPrice);
+                        <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="@minPrice-@maxPrice" @((isChecked ? "checked" : "")) name="Price" value="@minPrice-@maxPrice">
+                                <label class="custom-control-label" for="@minPrice-@maxPrice">
+                                    @labelValue
+                                    <span class="text-gray-25 font-size-12 font-weight-normal"> (@g.Count())</span>
+                                </label>
+                            </div>
+                        </div>
+                    }
+                    <div class="collapse" id="collapsePrice">
+                        @foreach (var g in Model.PriceGroupings.Skip(3))
+                        {
+                            int keyIndex = Model.PriceRange.IndexOf(g.Key);
+                            int prevIndex = keyIndex - (keyIndex == 0 ? 0 : 1);
+                            string minPrice = Model.PriceRange[prevIndex].ToString();
+                            string maxPrice = g.Key.ToString();
+                            string labelValue = $"{minPrice} - {maxPrice}";
+
+                            var isChecked = Context.Request.Query["Price"].Any(x => x == minPrice + "-" + @maxPrice);
+                            <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="@minPrice-@maxPrice" @((isChecked ? "checked" : ""))  name="Price" value="@minPrice-@maxPrice">
+                                    <label class="custom-control-label" for="@minPrice-@maxPrice">
+                                        @labelValue
+                                        <span class="text-gray-25 font-size-12 font-weight-normal"> (@g.Count())</span>
+                                    </label>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!-- Link -->
+                    <a class="link link-collapse small font-size-13 text-gray-27 d-inline-flex mt-2" data-toggle="collapse" href="#collapsePrice" role="button" aria-expanded="false" aria-controls="collapsePrice">
+                        <span class="link__icon text-gray-27 bg-white">
+                            <span class="link__icon-inner">+</span>
+                        </span>
+                        <span class="link-collapse__default">Daha fazla göster</span>
+                        <span class="link-collapse__active">Daha az göster</span>
+                    </a>
+                    <!-- End Link -->
+                }
+                else
+                {
+                    @foreach (var g in Model.PriceGroupings)
+                    {
+                        int keyIndex = Model.PriceRange.IndexOf(g.Key);
+                        int prevIndex = keyIndex - (keyIndex == 0 ? 0 : 1);
+                        string minPrice = Model.PriceRange[prevIndex].ToString();
+                        string maxPrice = g.Key.ToString();
+                        string labelValue = $"{minPrice} - {maxPrice}";
+
+                        var isChecked = Context.Request.Query["Price"].Any(x => x == minPrice + "-" + @maxPrice);
+                        <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="@minPrice-@maxPrice" @((isChecked ? "checked" : ""))  name="Price" value="@minPrice-@maxPrice">
+                                <label class="custom-control-label" for="@minPrice-@maxPrice">
+                                    @labelValue
+                                    <span class="text-gray-25 font-size-12 font-weight-normal"> (@g.Count())</span>
+                                </label>
+                            </div>
+                        </div>
+                    }
+                }
+                <!-- End View More - Collapse -->
             </div>
-        }
-        <button type="submit" class="btn btn-sm btn-primary">Apply</button>
 
-        <br /><br />
-    }  
-    <input type="hidden" id="sortByFilter" name="SortBy" value="Default" />
+        }
+        <div class="range-slider">
+            <button type="submit" class="btn px-4 btn-primary-dark-w py-2 rounded-lg">Filtrele</button>
+        </div>
+        <input type="hidden" id="sortByFilter" name="SortBy" value="Default" />
+    </div>
 </form>

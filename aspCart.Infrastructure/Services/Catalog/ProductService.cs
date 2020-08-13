@@ -183,7 +183,7 @@ namespace aspCart.Infrastructure.Services.Catalog
             {
                 result = result.Where(x => x
                     .Categories.Select(c => c.Category.Name.ToLower())
-                    .Intersect(categoryFilter.Select(cf => cf.ToLower()))
+                    
                     .Count() > 0
                 );
             }
@@ -210,7 +210,7 @@ namespace aspCart.Infrastructure.Services.Catalog
                     int maxPrice = Int32.Parse(p[1]);
 
                     var r = result.Where(x => x.Price >= minPrice && x.Price <= maxPrice);
-                    if (r.Count() > 0) tmpResult.AddRange(r);
+                    
                 }
                 result = tmpResult.AsQueryable();
             }

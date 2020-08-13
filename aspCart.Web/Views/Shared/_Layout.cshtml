@@ -26,6 +26,7 @@
 
     <link rel="stylesheet" href="/assets/vendor/animate.css/animate.min.css">
     <link rel="stylesheet" href="/assets/vendor/hs-megamenu/src/hs.megamenu.css">
+    <link rel="stylesheet" href="/assets/vendor/ion-rangeslider/css/ion.rangeSlider.css">
     <link rel="stylesheet" href="/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" href="/assets/vendor/fancybox/jquery.fancybox.css">
     <link rel="stylesheet" href="/assets/vendor/slick-carousel/slick/slick.css">
@@ -618,6 +619,7 @@
     <script src="/assets/vendor/svg-injector/dist/svg-injector.min.js"></script>
     <script src="/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
+    <script src="/assets/vendor/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
     <script src="/assets/vendor/typed.js/lib/typed.min.js"></script>
     <script src="/assets/vendor/slick-carousel/slick/slick.js"></script>
     <script src="/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
@@ -634,8 +636,10 @@
     <script src="/assets/js/components/hs.fancybox.js"></script>
     <script src="/assets/js/components/hs.onscroll-animation.js"></script>
     <script src="/assets/js/components/hs.slick-carousel.js"></script>
+    <script src="https://transvelo.github.io/electro-html/2.0/assets/js/components/hs.range-slider.js"></script>
     <script src="https://transvelo.github.io/electro-html/2.0/assets/js/components/hs.show-animation.js"></script>
     <script src="https://transvelo.github.io/electro-html/2.0/assets/js/components/hs.svg-injector.js"></script>
+    <script src="https://transvelo.github.io/electro-html/2.0/assets/js/components/hs.scroll-nav.js"></script>
     <script src="https://transvelo.github.io/electro-html/2.0/assets/js/components/hs.go-to.js"></script>
     <script src="https://transvelo.github.io/electro-html/2.0/assets/js/components/hs.selectpicker.js"></script>
     @RenderSection("Scripts", required: false)
@@ -732,6 +736,9 @@
 
             // initialization of select picker
             $.HSCore.components.HSSelectPicker.init('.js-select');
+
+            $.HSCore.components.HSRangeSlider.init('.js-range-slider');
+
         });</script>
 </body>
 </html>
